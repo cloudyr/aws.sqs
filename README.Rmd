@@ -1,0 +1,91 @@
+# AWS SQS Client Package #
+
+**aws.sqs** is a simple client package for the Amazon Web Services (AWS) [Simple Queue Service (SQS)](http://aws.amazon.com/sqs/) REST API, which is a message queuing service that can be used to facilitate communication between cloud and/or local applications.
+
+## Installation ##
+
+[![Build Status](https://travis-ci.org/cloudyr/aws.sqs.png?branch=master)](https://travis-ci.org/cloudyr/aws.sqs)
+
+To install the latest development version from GitHub, run the following:
+
+```R
+if(!require("devtools")){
+    install.packages("devtools")
+    library("devtools")
+}
+install_github("cloudyr/aws.sqs")
+```
+
+To install the latest version from CRAN, simply use `install.packages("aws.sqs")`.
+```
+
+## Code Examples ##
+
+To use SQS, you need to start by creating a queue, which is a store of messages that you would like to make available to users or applications:
+
+```R
+queue <- create_queue("ExampleQueue")
+```
+
+`create_queue` will create an SQS queue and return a character string containing the queue URL. You will need to use this URL in subsequent function calls in order to perform actions on a queue. Because the URL is long and not particularly memorable, **aws.sqs** implements a further convenience that allows you to pass a queue name (in this case "ExampleQueue") instead of the full URL. If you need the URL for some other reason (for example, to configure the queue in another application), you can retrieve it using `get_queue_url`:
+
+```R
+get_queue_url("ExampleQueue")
+```
+
+Once a URL is created, it will show up in the list of queues:
+
+```R
+list_queues()
+```
+
+And you can begin performing operations on the queue. The most important of these are `send_msg` (to put a message into the queue), `receive_msg` (to retrieve one or more messages from the queue), and `delete_msg` (to delete a message once it is no longer needed in the queue).
+
+```R
+send_msg("ExampleQueue", "This is a test message")
+```
+
+The `send_msg` function is also vectorized, so that you can send multiple messages in the same call simply by specifying a vector of message bodies. Note: The `send_msg` function will return some (mostly useless) details of the message, namely the MD5 sum of the message body. Perhaps this could be used to confirm that SQS has received and entered the message into the queue correctly.
+
+The flip side of `send_msg` is `receive_msg`, which pulls one or more messages (if there are any) from the queue. Once received, the message(s) are no longer available to any other `receive_msg` request for a specified "visibility timeout" period. This period is specified, by default, in the queue attributes and can be modified atomically for the particular messages being retrieved in this call to `receive_msg`. Note how two back-to-back `receive_msg` calls behave with and without a `timeout` argument:
+
+```R
+# With specified timeout
+(m <- receive_msg("ExampleQueue", timeout = 0)) # msg visible, does not mask msg for next call
+Sys.sleep(.5)
+receive_msg("ExampleQueue", timeout = 0) # msg still visible, does not mask msg for next call
+
+# No specified timeout (uses queue default; 30 seconds)
+receive_msg("ExampleQueue") # msg still visible, masks msg for next call
+Sys.sleep(.5)
+receive_msg("ExampleQueue") # msg not visible, msg masked by last call
+```
+
+By default, once the "visibility timeout" expires, the message becomes available to future polling requests by `receive_msg`. The function also supports "long polling," which allows your application to wait for a longer period of time for new messages to arrive in the queue. This minimizes the number of API calls that are needed to retrieve messages that arrive in the queue somewhat slowly.
+
+```R
+receive_msg("ExampleQueue", timeout = 5)
+receive_msg("ExampleQueue")
+receive_msg("ExampleQueue", wait = 5)
+```
+
+It is also possible to change the visibility of a message after it has been received. This can be useful if message processing is taking longer than the visibility timeout window. The `visibility` function takes a queue name (or URL), message handle, and an amount to extend the timeout in seconds.
+
+```R
+visibility("ExampleQueue", m$ReceiptHandle, timeout = 30)
+```
+
+Two important notes are worth highlighting here. First, a queue can only have a maximum timeout of 12 hours, but `visibility` is not aware of how long the current visibility is (and that amount of time is not retrievable via the API), so you need to be cautious in extending the visibility timeout beyond the maximum by respecting the queue's default timeout and accommodating any modifications of that made when polling for new messages. Second, the function is vectorized to allow visibility timeout extensions, of potentially different amounts of time, for multiple messages from the same queue.
+
+If you are finished with a message entirely (e.g., your application has processed the message and the task associated with the message is completed), you should delete the message using the queue name (or URL) and the *ReceiptHandle* for the message as returned by `receive_msg`:
+
+```R
+delete_msg("ExampleQueue", m$ReceiptHandle[1])
+```
+
+`delete_msg` will accept a vector of ReceiptHandle values from the same queue to perform a bulk delete. If you're done with all messages in a queue, you can remove them all using, e.g., `purge_queue("TestQueue")`. If you're done with a queue entirely, you can delete it using `delete_queue`.
+
+
+
+---
+[![cloudyr project logo](http://i.imgur.com/JHS98Y7.png)](https://github.com/cloudyr)
