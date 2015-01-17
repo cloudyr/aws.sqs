@@ -4,7 +4,7 @@ citHeader("To cite package 'aws.sqs' in publications use:")
  vers <- paste("R package version", meta$Version)
  
  citEntry(entry="Manual",
-		  title = "aws.sqs: AWS SNS Client Package",
+		  title = "aws.sqs: AWS SQS Client Package",
 		  author = personList(as.person("Thomas J. Leeper")),
 		  year = year,
 		  note = vers,

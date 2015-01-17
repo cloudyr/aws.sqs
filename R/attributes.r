@@ -1,4 +1,4 @@
-get_attributes <- function(queue, attribute = "All", ...) {
+get_queue_attrs <- function(queue, attribute = "All", ...) {
     queue <- .urlFromName(queue)
     query_args <- list(Action = "SetQueueAttributes")
     a <- as.list(attribute)
@@ -10,7 +10,7 @@ get_attributes <- function(queue, attribute = "All", ...) {
     return(out)
 }
 
-set_attributes <- function(queue, ...) {
+set_queue_attrs <- function(queue, ...) {
     queue <- .urlFromName(queue)
     query_args <- list(Action = "SetQueueAttributes")
     out <- sqsHTTP(url = queue, query_args = query, ...)

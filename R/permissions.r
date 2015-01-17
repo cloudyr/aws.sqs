@@ -1,4 +1,4 @@
-add_permission <- function(queue, principal, action, label, ...) {
+add_permission <- function(queue, label, principal, action, ...) {
     queue <- .urlFromName(queue)
     out <- sqsHTTP(url = queue, query = list(Action = "AddPermission"), ...)
     if(inherits(out, "aws-error"))
