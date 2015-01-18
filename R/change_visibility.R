@@ -28,5 +28,6 @@ visibility <- function(queue, handle, timeout = NULL, ...) {
     out <- sqsHTTP(url = queue, query = query_args, ...)
     if(inherits(out, "aws-error"))
         return(out)
-    out
+    structure(TRUE,
+              RequestId = out$ChangeMessageVisibilityResponse$ResponseMetadata$RequestId)
 }

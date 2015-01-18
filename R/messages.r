@@ -38,12 +38,12 @@ delete_msg <- function(queue, handle, ...) {
     } else {
         # single mode
         query_args <- list(action = "DeleteMessage")
-        query_args$ReceiptHandle <- handle
+        query_args$ReceiptHandle <- URLencode(handle)
     }
     out <- sqsHTTP(url = queue, query = query_args, ...)
     if(inherits(out, "aws-error"))
         return(out)
-    out
+    structure(TRUE, RequestId = out$DeleteMessageResponse$ResponseMetadata$RequestId)
 }
 
 send_msg <- function(queue, msg, attributes = NULL, delay = NULL, ...) {

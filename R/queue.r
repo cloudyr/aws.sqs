@@ -19,5 +19,5 @@ purge_queue <- function(queue, ...) {
     out <- sqsHTTP(url = queue, query = list(Action = "PurgeQueue"), ...)
     if(inherits(out, "aws-error"))
         return(out)
-    structure(list(), RequestId = out$PurgeQueueResponse$ResponseMetadata$RequestId)
+    structure(TRUE, RequestId = out$PurgeQueueResponse$ResponseMetadata$RequestId)
 }

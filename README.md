@@ -1,6 +1,10 @@
 # AWS SQS Client Package #
 
-**aws.sqs** is a simple client package for the Amazon Web Services (AWS) [Simple Queue Service (SQS)](http://aws.amazon.com/sqs/) API, which is a message queuing service that can be used to facilitate communication between cloud and/or local applications.
+**aws.sqs** is a simple client package for the Amazon Web Services (AWS) [Simple Queue Service (SQS)](http://aws.amazon.com/sqs/) API, which is a message queuing service that can be used to facilitate communication between cloud and/or local applications. Possible use cases include:
+
+ - Logging error messages to process later
+ - Receiving messages from other AWS services (e.g., Simple Notification Service, Mechanical Turk, etc.)
+ - Piping output from one application into the input of another application without requiring a persistent connection
 
 ## Installation ##
 
@@ -83,7 +87,11 @@ If you are finished with a message entirely (e.g., your application has processe
 delete_msg("ExampleQueue", m$ReceiptHandle[1])
 ```
 
-`delete_msg` will accept a vector of ReceiptHandle values from the same queue to perform a bulk delete. If you're done with all messages in a queue, you can remove them all using, e.g., `purge_queue("TestQueue")`. If you're done with a queue entirely, you can delete it using `delete_queue`.
+`delete_msg` will accept a vector of ReceiptHandle values from the same queue to perform a bulk delete. If you're done with all messages in a queue, you can remove them all using, e.g., `purge_queue("TestQueue")`. If you're done with a queue entirely, you can delete it:
+
+```{r}
+delete_queue("ExampleQueue")
+```
 
 
 ---
