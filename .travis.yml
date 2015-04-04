@@ -1,1 +1,3 @@
 language: r
+github_packages:
+ - cloudyr/aws.signature
