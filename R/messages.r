@@ -1,4 +1,4 @@
-receive_msg <- function(queue, attribute = NULL, n = 1, timeout = NULL, wait = NULL, ...) {
+receive_msg <- function(queue, attributes = NULL, n = 1, timeout = NULL, wait = NULL, ...) {
     queue <- .urlFromName(queue)
     query_args <- list(Action = "ReceiveMessage")
     if(n > 10) {

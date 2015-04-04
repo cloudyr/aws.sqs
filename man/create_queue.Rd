@@ -7,7 +7,7 @@ create_queue(name, attributes, ...)
 }
 \arguments{
   \item{name}{A character string containing a name for the queue.}
-  \item{}{}
+  \item{attributes}{}
   \item{...}{Additional arguments passed to \code{\link{sqsHTTP}}.}
 }
 \details{Create a new SQS queue.}

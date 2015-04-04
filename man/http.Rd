@@ -3,7 +3,7 @@
 \title{Execute SQS API Request}
 \description{This is the workhorse function to execute calls to the SQS API.}
 \usage{
-snsHTTP(url = NULL, query = list(), region, key, secret, ...)
+sqsHTTP(url = NULL, query = list(), region, key, secret, ...)
 }
 \arguments{
   \item{url}{A character string containing an SQS API endpoint URL.}

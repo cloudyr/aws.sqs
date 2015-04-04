@@ -3,7 +3,7 @@
 \title{Purge a queue}
 \description{Purge an SQS queue of its message}
 \usage{
-purge_queue(name, ...)
+purge_queue(queue, ...)
 }
 \arguments{
   \item{queue}{A character string containing a queue URL, or the name of the queue.}

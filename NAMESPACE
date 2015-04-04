@@ -2,4 +2,6 @@ exportPattern("^[[:alpha:]]+")
 import(aws.signature)
 import(httr)
 importFrom(XML, xmlParse, xmlToList)
+importFrom(jsonlite, fromJSON)
 importFrom(utils, URLencode)
+

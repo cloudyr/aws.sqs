@@ -13,7 +13,7 @@ get_queue_attrs <- function(queue, attribute = "All", ...) {
 set_queue_attrs <- function(queue, ...) {
     queue <- .urlFromName(queue)
     query_args <- list(Action = "SetQueueAttributes")
-    out <- sqsHTTP(url = queue, query_args = query, ...)
+    out <- sqsHTTP(url = queue, query = query_args, ...)
     if(inherits(out, "aws-error"))
         return(out)
     return(out)

@@ -3,7 +3,7 @@
 \title{Delete a queue}
 \description{Delete an SQS queue}
 \usage{
-delete_queue(name, attributes, ...)
+delete_queue(queue, ...)
 }
 \arguments{
   \item{queue}{A character string containing a queue URL, or the name of the queue.}
