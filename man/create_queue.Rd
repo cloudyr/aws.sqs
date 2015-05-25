@@ -3,11 +3,11 @@
 \title{Create a queue}
 \description{Create an SQS queue}
 \usage{
-create_queue(name, attributes, ...)
+create_queue(name, attributes = NULL, ...)
 }
 \arguments{
   \item{name}{A character string containing a name for the queue.}
-  \item{attributes}{}
+  \item{attributes}{Currently ignored}
   \item{...}{Additional arguments passed to \code{\link{sqsHTTP}}.}
 }
 \details{Create a new SQS queue.}

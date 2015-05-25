@@ -53,7 +53,7 @@ send_msg <- function(queue, msg, attributes = NULL, delay = NULL, ...) {
         query_args <- list(Action = "SendMessageBatch")
         n <- 1:length(msg)
         id <- paste0("msg", n)
-        a <- as.list(c(id, n))
+        a <- as.list(c(id, msg))
         names(a) <- c(paste0("DeleteMessageBatchRequestEntry.",n,".Id"),
                       paste0("DeleteMessageBatchRequestEntry.",n,".ReceiptHandle"))
         query_args <- c(query_args, a)
@@ -69,7 +69,7 @@ send_msg <- function(queue, msg, attributes = NULL, delay = NULL, ...) {
         out <- sqsHTTP(url = queue, query = query_args, ...)
         if(inherits(out, "aws-error"))
             return(out)
-        structure(out$SendMessageBatchResponse$SendMessageBatchResult,
-                  RequestId = out$SendMessageBatchResponse$ResponseMetadata$RequestId)
+        structure(list(out$SendMessageResponse$SendMessageResult),
+                  RequestId = out$SendMessageResponse$ResponseMetadata$RequestId)
     }
 }

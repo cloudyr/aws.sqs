@@ -1,4 +1,4 @@
-create_queue <- function(name, attributes, ...) {
+create_queue <- function(name, attributes = NULL, ...) {
     out <- sqsHTTP(query = list(Action = "CreateQueue", QueueName = name), ...)
     if(inherits(out, "aws-error"))
         return(out)

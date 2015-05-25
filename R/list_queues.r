@@ -9,9 +9,8 @@ list_queues <- function(starts_with = NULL, ...) {
               RequestId = out$ListQueuesResponse$ResponseMetadata$RequestId)
 }
 
-deadletter_queues <- function(queue, ...) {
-    queue <- .urlFromName(queue)
-    out <- sqsHTTP(query = list(Action = "ListDeadLetterSourceQueues", QueueUrl = queue), ...)
+deadletter_queues <- function(...) {
+    out <- sqsHTTP(query = list(Action = "ListDeadLetterSourceQueues"), ...)
     if(inherits(out, "aws-error"))
         return(out)
     structure(out$ListDeadLetterSourceQueuesResponse$ListDeadLetterSourceQueuesResult$queueUrls,

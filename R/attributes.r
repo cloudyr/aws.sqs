@@ -1,22 +1,31 @@
-get_queue_attrs <- function(queue, attribute = "All", ...) {
+get_queue_attrs <- function(queue, attributes = "All", ...) {
     queue <- .urlFromName(queue)
     query_args <- list(Action = "SetQueueAttributes")
-    a <- as.list(attribute)
+    a <- as.list(attributes)
     names(a) <- paste0("Attribute.Name.",1:length(a))
     query_args <- c(query_args, a)
     out <- sqsHTTP(queue, query = query_args, ...)
     if(inherits(out, "aws-error"))
         return(out)
-    return(out)
+    x <- out$GetQueueAttributesResponse$GetQueueAttributesResult
+    structure(setNames(sapply(x, `[[`, "Value"), sapply(x, `[[`, "Name")),
+              RequestId = out$GetQueueAttributesResponse$ResponseMetadata$RequestId)
 }
 
-set_queue_attrs <- function(queue, ...) {
+set_queue_attrs <- function(queue, attributes, ...) {
     queue <- .urlFromName(queue)
     query_args <- list(Action = "SetQueueAttributes")
+    a <- length(attributes)
+    query_args <- c(query_args, 
+                    setNames(names(attributes), 
+                             paste0("Attribute.Name.", seq_along(attributes))),
+                    setNames(unname(unlist(attributes)),
+                             paste0("Attribute.Value.", seq_along(attributes))) )
     out <- sqsHTTP(url = queue, query = query_args, ...)
     if(inherits(out, "aws-error"))
         return(out)
-    return(out)
+    structure(TRUE,
+              RequestId = out$SetQueueAttributesResponse$ResponseMetadata$RequestId)
 }
 
 get_queue_url <- function(name, owner = NULL, ...) {

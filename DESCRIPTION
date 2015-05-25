@@ -2,7 +2,7 @@ Package: aws.sqs
 Type: Package
 Title: AWS SQS Client Package
 Version: 0.1
-Date: 2015-04-04
+Date: 2015-05-25
 Author: Thomas J. Leeper
 Maintainer: Thomas J. Leeper <thosjleeper@gmail.com>
 Description: A simple client package for the Amazon Web Services (AWS) Simple Queue Service (SQS) API.
