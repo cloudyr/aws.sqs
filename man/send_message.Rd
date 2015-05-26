@@ -9,7 +9,7 @@ send_msg(queue, msg, attributes = NULL, delay = NULL, ...)
   \item{queue}{A character string containing a queue URL, or the name of the queue.}
   \item{msg}{A character vector containing one or more message bodies.}
   \item{attributes}{Currently ignored. (If \code{msg} is of length one, a specification of message attributes. Ignored otherwise.)}
-  \item{delay}{A numeric value indicating the number of seconds between 0 and 900 to delay a specific message. If \codde{NULL}, the default value for the queue applies.}
+  \item{delay}{A numeric value indicating the number of seconds between 0 and 900 to delay a specific message. If \code{NULL}, the default value for the queue applies.}
   \item{...}{Additional arguments passed to \code{\link{sqsHTTP}}.}
 }
 \details{Send a new message to an SQS queue.}
