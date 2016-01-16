@@ -1,4 +1,20 @@
 language: r
 sudo: required
+r_packages:
+- knitr
 r_github_packages:
- - cloudyr/aws.signature
+- jimhester/covr
+- eddelbuettel/drat
+after_failure:
+  email:
+    recipients:
+    - thosjleeper@gmail.com
+    on_success: change
+    on_failure: change
+after_success:
+- Rscript -e 'library("covr");codecov()'
+- test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && bash
+  drat.sh
+env:
+  global:
+    secure: QN29O3cSh3wWKu0J9qAlRJurI8nGsaJa9omf3opgdHcBAknwwJEGLjY5hVXWXDzbBUkF7y9kTLlZzkYhND8FS9O2wkW4zUV/Q2S0pCUCpoJ07F10wEGvyYa8ft6Aj8RQPMBCx7lhbxA+WvBrPalkA9yoi60NwIlf6YOl8JejCsY=
