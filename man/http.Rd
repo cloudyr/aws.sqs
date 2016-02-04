@@ -3,7 +3,11 @@
 \title{Execute SQS API Request}
 \description{This is the workhorse function to execute calls to the SQS API.}
 \usage{
-sqsHTTP(url = NULL, query = list(), region, key, secret, ...)
+sqsHTTP(url = NULL, query = list(), 
+        region = Sys.getenv("AWS_DEFAULT_REGION", "us-east-1"), 
+        key = Sys.getenv("AWS_ACCESS_KEY_ID"), 
+        secret = Sys.getenv("AWS_SECRET_ACCESS_KEY"), 
+        ...)
 }
 \arguments{
   \item{url}{A character string containing an SQS API endpoint URL.}
