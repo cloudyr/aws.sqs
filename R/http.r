@@ -1,7 +1,9 @@
-sqsHTTP <- function(url = NULL, query = list(), 
-                    region = Sys.getenv("AWS_DEFAULT_REGION","us-east-1"), 
+sqsHTTP <- function(url = NULL, 
+                    query = list(), 
+                    region = Sys.getenv("AWS_DEFAULT_REGION", "us-east-1"), 
                     key = Sys.getenv("AWS_ACCESS_KEY_ID"), 
-                    secret = Sys.getenv("AWS_SECRET_ACCESS_KEY"), ...) {
+                    secret = Sys.getenv("AWS_SECRET_ACCESS_KEY"), 
+                    ...) {
     if(is.null(url))
         url <- paste0("https://sqs.",region,".amazonaws.com")
     p <- parse_url
