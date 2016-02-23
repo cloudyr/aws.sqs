@@ -6,23 +6,6 @@
  - Receiving messages from other AWS services (e.g., Simple Notification Service, Mechanical Turk, etc.)
  - Piping output from one application into the input of another application without requiring a persistent connection
 
-## Installation ##
-
-[![CRAN](http://www.r-pkg.org/badges/version/aws.sqs)](http://cran.r-project.org/package=aws.sqs)
-[![Build Status](https://travis-ci.org/cloudyr/aws.sqs.png?branch=master)](https://travis-ci.org/cloudyr/aws.sqs) [![codecov.io](http://codecov.io/github/cloudyr/aws.sqs/coverage.svg?branch=master)](http://codecov.io/github/cloudyr/aws.sqs?branch=master)
-
-To install the latest development version from GitHub, run the following:
-
-```R
-if(!require("devtools")){
-    install.packages("devtools")
-    library("devtools")
-}
-install_github("cloudyr/aws.sqs")
-```
-
-To install the latest version from CRAN, simply use `install.packages("aws.sqs")`.
-
 To use the package, you will need an AWS account and enter your credentials into R. Your keypair can be generated on the [IAM Management Console](https://console.aws.amazon.com/iam/home?#security_credential) under the heading *Access Keys*. Note that you only have access to your secret key once. After it is generated, you need to save it in a secure location. New keypairs can be generated at any time if yours has been lost, stolen, or forgotten. 
 
 By default, all **cloudyr** packages look for the access key ID and secret access key in environment variables. You can also use this to specify a default region. For example:
@@ -106,6 +89,23 @@ delete_msg("ExampleQueue", m$ReceiptHandle[1])
 ```{r}
 delete_queue("ExampleQueue")
 ```
+
+## Installation ##
+
+[![CRAN](http://www.r-pkg.org/badges/version/aws.sqs)](http://cran.r-project.org/package=aws.sqs)
+[![Build Status](https://travis-ci.org/cloudyr/aws.sqs.png?branch=master)](https://travis-ci.org/cloudyr/aws.sqs)
+[![codecov.io](http://codecov.io/github/cloudyr/aws.sqs/coverage.svg?branch=master)](http://codecov.io/github/cloudyr/aws.sqs?branch=master)
+
+To install the latest development version from GitHub, run the following:
+
+```R
+if(!require("ghit")){
+    install.packages("ghit")
+}
+ghit::install_github("cloudyr/aws.sqs")
+```
+
+To install the latest version from CRAN, simply use `install.packages("aws.sqs")`.
 
 
 ---
