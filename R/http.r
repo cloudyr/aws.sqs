@@ -45,7 +45,7 @@ sqsHTTP <- function(url = NULL,
     } else {
         out <- try(fromJSON(content(r, "text")), silent = TRUE)
         if(inherits(out, "try-error"))
-            out <- structure(content(r, "text"), "unknown")
+            out <- structure(content(r, "text"), class = "unknown")
     }
     return(out)
 }
