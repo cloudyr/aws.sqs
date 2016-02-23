@@ -10,7 +10,7 @@ delete_msg(queue, handle, ...)
   \item{handle}{A message handle, as returned by \code{\link{receive_msg}}.}
   \item{...}{Additional arguments passed to \code{\link{sqsHTTP}}.}
 }
-\details{Delete one or more messages from an SQS queue. If a message is not deleted, it remains visible in the queue and will be returned by subsequent calls to \code{\link{receive_message}}.}
+\details{Delete one or more messages from an SQS queue. If a message is not deleted, it remains visible in the queue and will be returned by subsequent calls to \code{\link{receive_msg}}.}
 \value{If operation succeeds, a logical \code{TRUE}.}
 \references{
 \href{http://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_DeleteMessage.html}{DeleteMessage}

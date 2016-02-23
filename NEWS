@@ -1,6 +1,7 @@
 # CHANGES TO aws.sqs 0.1.2 #
 
 * Fixed a `structure()` bug in `sqsHTTP()` that was reporting an error when JSON parsing failed. (#4)
+* Documented `add_permission()` and `remove_permission()`.
 
 # CHANGES TO aws.sqs 0.1 #
 

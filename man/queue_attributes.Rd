@@ -1,6 +1,6 @@
 \name{attributes}
-\alias{get_queue_attributes}
-\alias{set_queue_attributes}
+\alias{get_queue_attrs}
+\alias{set_queue_attrs}
 \title{Queue Attributes}
 \description{Get and set queue attributes}
 \usage{
