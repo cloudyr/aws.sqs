@@ -9,7 +9,7 @@
 ## Installation ##
 
 [![CRAN](http://www.r-pkg.org/badges/version/aws.sqs)](http://cran.r-project.org/package=aws.sqs)
-[![Build Status](https://travis-ci.org/cloudyr/aws.sqs.png?branch=master)](https://travis-ci.org/cloudyr/aws.sqs)
+[![Build Status](https://travis-ci.org/cloudyr/aws.sqs.png?branch=master)](https://travis-ci.org/cloudyr/aws.sqs) [![codecov.io](http://codecov.io/github/cloudyr/aws.sqs/coverage.svg?branch=master)](http://codecov.io/github/cloudyr/aws.sqs?branch=master)
 
 To install the latest development version from GitHub, run the following:
 
