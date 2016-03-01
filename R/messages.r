@@ -27,21 +27,20 @@ receive_msg <- function(queue, attributes = NULL, n = 1, timeout = NULL, wait = 
 
 delete_msg <- function(queue, handle, ...) {
     queue <- .urlFromName(queue)
-    if(length(handle) > 1) {
+    if (length(handle) > 1) {
         # batch mode
         query_args <- list(action = "DeleteMessageBatch")
         n <- 1:length(handle)
         id <- paste0("msg", n)
-        a <- as.list(c(id, n))
+        a <- as.list(c(id, handle))
         names(a) <- c(paste0("DeleteMessageBatchRequestEntry.",n,".Id"),
                       paste0("DeleteMessageBatchRequestEntry.",n,".ReceiptHandle"))
         query_args <- c(query_args, a)
     } else {
         # single mode
-        query_args <- list(ReceiptHandle = handle, action = "DeleteMessage")
+        query_args <- list(ReceiptHandle = handle, Action = "DeleteMessage")
     }
     out <- sqsHTTP(url = queue, query = query_args, ...)
-    return(out)
     if (inherits(out, "aws-error") || inherits(out, "unknown")) {
         return(out)
     }

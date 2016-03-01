@@ -1,6 +1,5 @@
 sqsHTTP <- function(url = NULL, 
                     query = list(), 
-                    verb = "GET",
                     region = Sys.getenv("AWS_DEFAULT_REGION", "us-east-1"), 
                     key = Sys.getenv("AWS_ACCESS_KEY_ID"), 
                     secret = Sys.getenv("AWS_SECRET_ACCESS_KEY"), 
@@ -19,7 +18,7 @@ sqsHTTP <- function(url = NULL,
                datetime = d_timestamp,
                region = region,
                service = "sqs",
-               verb = verb,
+               verb = "GET",
                action = action,
                query_args = query,
                canonical_headers = list(host = paste0("sqs.",region,".amazonaws.com"),
@@ -30,26 +29,20 @@ sqsHTTP <- function(url = NULL,
                          `x-amz-content-sha256` = S$BodyHash,
                          Authorization = S$SignatureHeader)
     }
-    if (verb == "DELETE") {
-        if (length(query)) {
-            r <- DELETE(url, H, query = query, ...)
-        } else {
-            r <- DELETE(url, H, ...)
-        }
+    
+    if (length(query)) {
+        r <- GET(url, H, query = query, ...)
     } else {
-        if (length(query)) {
-            r <- GET(url, H, query = query, ...)
-        } else {
-            r <- GET(url, H, ...)
-        }
+        r <- GET(url, H, ...)
     }
+
     cont <- content(r, "text", encoding = "UTF-8")
     if (tolower(http_status(r)$category) == "client error") {
         x <- try(xmlToList(xmlParse(cont)), silent = TRUE)
         if (inherits(x, "try-error")) {
             x <- try(fromJSON(cont)$Error, silent = TRUE)
         }
-        warn_for_status(r)
+        warning(paste0(http_status(r)$message, ": ", x$Code, " (", x$Message, ")"))
         h <- headers(r)
         out <- structure(x, headers = h, class = "aws_error")
         attr(out, "request_canonical") <- S$CanonicalRequest
