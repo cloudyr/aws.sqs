@@ -18,8 +18,9 @@ receive_msg <- function(queue, attributes = NULL, n = 1, timeout = NULL, wait = 
     } else {
         out <- sqsHTTP(url = queue, query = query_args, ...)
     }
-    if(inherits(out, "aws-error"))
+    if (inherits(out, "aws-error") || inherits(out, "unknown")) {
         return(out)
+    }
     structure(out$ReceiveMessageResponse$ReceiveMessageResult$messages, 
               RequestId = out$ReceiveMessageResponse$ResponseMetadata$RequestId)
 }
@@ -37,12 +38,13 @@ delete_msg <- function(queue, handle, ...) {
         query_args <- c(query_args, a)
     } else {
         # single mode
-        query_args <- list(action = "DeleteMessage")
-        query_args$ReceiptHandle <- URLencode(handle)
+        query_args <- list(ReceiptHandle = handle, action = "DeleteMessage")
     }
     out <- sqsHTTP(url = queue, query = query_args, ...)
-    if(inherits(out, "aws-error"))
+    return(out)
+    if (inherits(out, "aws-error") || inherits(out, "unknown")) {
         return(out)
+    }
     structure(TRUE, RequestId = out$DeleteMessageResponse$ResponseMetadata$RequestId)
 }
 
@@ -58,8 +60,9 @@ send_msg <- function(queue, msg, attributes = NULL, delay = NULL, ...) {
                       paste0("DeleteMessageBatchRequestEntry.",n,".ReceiptHandle"))
         query_args <- c(query_args, a)
         out <- sqsHTTP(url = queue, query = query_args, ...)
-        if(inherits(out, "aws-error"))
+        if (inherits(out, "aws-error") || inherits(out, "unknown")) {
             return(out)
+        }
         structure(out$SendMessageBatchResponse$SendMessageBatchResult,
                   RequestId = out$SendMessageBatchResponse$ResponseMetadata$RequestId)
     } else {
@@ -67,8 +70,9 @@ send_msg <- function(queue, msg, attributes = NULL, delay = NULL, ...) {
         query_args <- list(Action = "SendMessage")
         query_args$MessageBody = msg
         out <- sqsHTTP(url = queue, query = query_args, ...)
-        if(inherits(out, "aws-error"))
+        if (inherits(out, "aws-error") || inherits(out, "unknown")) {
             return(out)
+        }
         structure(list(out$SendMessageResponse$SendMessageResult),
                   RequestId = out$SendMessageResponse$ResponseMetadata$RequestId)
     }
