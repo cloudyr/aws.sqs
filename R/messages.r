@@ -21,7 +21,18 @@ receive_msg <- function(queue, attributes = NULL, n = 1, timeout = NULL, wait = 
     if (inherits(out, "aws-error") || inherits(out, "unknown")) {
         return(out)
     }
-    structure(out$ReceiveMessageResponse$ReceiveMessageResult$messages, 
+    out2 <- out$ReceiveMessageResponse$ReceiveMessageResult$messages
+    if (!length(out2)) {
+        out2 <- data.frame(Attributes = character(0),
+                           Body = character(0),
+                           MD5OfBody = character(0),
+                           MD5OfMessageAttributes = character(0),
+                           MessageAttributes = character(0),
+                           MessageId = character(0),
+                           ReceiptHandle = character(0),
+                           stringsAsFactors = FALSE)
+    }
+    structure(out2, 
               RequestId = out$ReceiveMessageResponse$ResponseMetadata$RequestId)
 }
 

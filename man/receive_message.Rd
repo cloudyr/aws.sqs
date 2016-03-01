@@ -14,7 +14,7 @@ receive_msg(queue, attributes = NULL, n = 1, timeout = NULL, wait = NULL, ...)
   \item{...}{Additional arguments passed to \code{\link{sqsHTTP}}.}
 }
 \details{Receive one or more messages from an SQS queue.}
-\value{A list of messages.}
+\value{A data.frame of messages.}
 \references{\href{http://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_ReceiveMessage.html}{ReceiveMessage}}
 \author{Thomas J. Leeper}
 %\note{}
