@@ -96,7 +96,14 @@ delete_queue("ExampleQueue")
 [![Build Status](https://travis-ci.org/cloudyr/aws.sqs.png?branch=master)](https://travis-ci.org/cloudyr/aws.sqs)
 [![codecov.io](http://codecov.io/github/cloudyr/aws.sqs/coverage.svg?branch=master)](http://codecov.io/github/cloudyr/aws.sqs?branch=master)
 
-To install the latest development version from GitHub, run the following:
+This package is not yet on CRAN. To install the latest development version you can install from the cloudyr drat repository:
+
+```R
+# latest stable version
+install.packages("aws.sqs", repos = c(getOption("repos"), "http://cloudyr.github.io/drat"))
+```
+
+Or, to pull a potentially unstable version directly from GitHub:
 
 ```R
 if(!require("ghit")){
@@ -104,9 +111,6 @@ if(!require("ghit")){
 }
 ghit::install_github("cloudyr/aws.sqs")
 ```
-
-To install the latest version from CRAN, simply use `install.packages("aws.sqs")`.
-
 
 ---
 [![cloudyr project logo](http://i.imgur.com/JHS98Y7.png)](https://github.com/cloudyr)
