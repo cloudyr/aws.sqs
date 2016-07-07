@@ -122,11 +122,11 @@ delete_msg <- function(queue, handle, ...) {
 #' \href{http://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_SendMessage.html}{SendMessage}
 #' 
 #' \href{http://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_SendMessageBatch.html}{SendMessageBatch}
-send_msg <- function(queue, msg, attributes = NULL, delay = NULL, ...) {
+send_msg <- function(queue, msg, query = list(), attributes = NULL, delay = NULL, ...) {
     queue <- .urlFromName(queue)
     if(length(msg) > 1) {
         # batch mode
-        query_args <- list(Action = "SendMessageBatch")
+        query_args <- append(query, list(Action = "SendMessageBatch"))
         n <- 1:length(msg)
         id <- paste0("msg", n)
         a <- as.list(c(id, msg))
@@ -141,7 +141,7 @@ send_msg <- function(queue, msg, attributes = NULL, delay = NULL, ...) {
                   RequestId = out$SendMessageBatchResponse$ResponseMetadata$RequestId)
     } else {
         # single mode
-        query_args <- list(Action = "SendMessage")
+        query_args <- append(query, list(Action = "SendMessage"))
         query_args$MessageBody = msg
         out <- sqsHTTP(url = queue, query = query_args, ...)
         if (inherits(out, "aws-error") || inherits(out, "unknown")) {
