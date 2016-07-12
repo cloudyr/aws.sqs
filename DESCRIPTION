@@ -17,4 +17,4 @@ Suggests:
     testthat
 URL: https://github.com/cloudyr/aws.sqs
 BugReports: https://github.com/cloudyr/aws.sqs/issues
-RoxygenNote: 5.0.1.9000
+RoxygenNote: 5.0.1

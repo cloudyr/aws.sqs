@@ -1,15 +1,10 @@
 #' @title Receive message
 #' @description Receive one or more messages from an SQS queue
-#' @param queue A character string containing a queue URL, or the name of the
-#' queue.
+#' @param queue A character string containing a queue URL, or the name of the queue.
 #' @param attributes Currently ignored.
 #' @param n The number of messages to retrieve (maximum 10).
-#' @param timeout A number of seconds to make the message invisible to
-#' subsequent \code{receive_msg} requests. This modifies the queue's default
-#' visibility timeout. See \code{\link{visibility}} to modify this value after
-#' receiving a message.
-#' @param wait A number of seconds to wait for messages before responding to
-#' the request.
+#' @param timeout A number of seconds to make the message invisible to subsequent \code{receive_msg} requests. This modifies the queue's default visibility timeout. See \code{\link{visibility}} to modify this value after receiving a message.
+#' @param wait A number of seconds to wait for messages before responding to the request.
 #' @param ... Additional arguments passed to \code{\link{sqsHTTP}}.
 #' @return A data.frame of messages.
 #' @author Thomas J. Leeper
@@ -60,11 +55,8 @@ receive_msg <- function(queue, attributes = NULL, n = 1, timeout = NULL, wait = 
 
 #' @title delete_msg
 #' @description Delete one or more messages from an SQS queue
-#' @details Delete one or more messages from an SQS queue. If a message is not deleted,
-#' it remains visible in the queue and will be returned by subsequent calls to
-#' \code{\link{receive_msg}}.
-#' @param queue A character string containing a queue URL, or the name of the
-#' queue.
+#' @details Delete one or more messages from an SQS queue. If a message is not deleted, it remains visible in the queue and will be returned by subsequent calls to \code{\link{receive_msg}}.
+#' @param queue A character string containing a queue URL, or the name of the queue.
 #' @param handle A message handle, as returned by \code{\link{receive_msg}}.
 #' @param ... Additional arguments passed to \code{\link{sqsHTTP}}.
 #' @return If operation succeeds, a logical \code{TRUE}.
@@ -99,29 +91,20 @@ delete_msg <- function(queue, handle, ...) {
 
 
 
-#' send_msg
-#' 
-#' Send a message to an SQS queue
-#' 
-#' Send a new message to an SQS queue.
-#' 
-#' @param queue A character string containing a queue URL, or the name of the
-#' queue.
+#' @title send_msg
+#' @description Send a message to an SQS queue
+#' @param queue A character string containing a queue URL, or the name of the queue.
 #' @param msg A character vector containing one or more message bodies.
-#' @param attributes Currently ignored. (If \code{msg} is of length one, a
-#' specification of message attributes. Ignored otherwise.)
-#' @param delay A numeric value indicating the number of seconds between 0 and
-#' 900 to delay a specific message. If \code{NULL}, the default value for the
-#' queue applies.
+#' @param attributes Currently ignored. (If \code{msg} is of length one, a specification of message attributes. Ignored otherwise.)
+#' @param delay A numeric value indicating the number of seconds between 0 and 900 to delay a specific message. If \code{NULL}, the default value for the queue applies.
 #' @param ... Additional arguments passed to \code{\link{sqsHTTP}}.
-#' @return A list of message information, including the MessageId and an MD5
-#' checksum of the message body.
+#' @return A list of message information, including the MessageId and an MD5 checksum of the message body.
 #' @author Thomas J. Leeper
 #' @seealso \code{link{receive_msg}} \code{link{delete_msg}}
 #' @references
 #' \href{http://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_SendMessage.html}{SendMessage}
-#' 
 #' \href{http://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_SendMessageBatch.html}{SendMessageBatch}
+#' @export
 send_msg <- function(queue, msg, attributes = NULL, delay = NULL, ...) {
     queue <- .urlFromName(queue)
     if(length(msg) > 1) {

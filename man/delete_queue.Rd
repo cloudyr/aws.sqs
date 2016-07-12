@@ -7,22 +7,18 @@
 delete_queue(queue, ...)
 }
 \arguments{
-\item{queue}{A character string containing a queue URL, or the name of the
-queue.}
+\item{queue}{A character string containing a queue URL, or the name of the queue.}
 
 \item{...}{Additional arguments passed to \code{\link{sqsHTTP}}.}
 }
 \value{
-If successful, a logical \code{TRUE} value. Otherwise, a data
-structure of class \dQuote{aws_error} containing any error message(s) from
-AWS and information about the request attempt.
+If successful, a logical \code{TRUE} value. Otherwise, a data structure of class \dQuote{aws_error} containing any error message(s) from AWS and information about the request attempt.
 }
 \description{
 Delete an SQS queue
 }
 \details{
-Delete an SQS queue. Use \code{\link{purge_queue}} to remove all messages
-from a queue without deleting it.
+Delete an SQS queue. Use \code{\link{purge_queue}} to remove all messages from a queue without deleting it.
 }
 \author{
 Thomas J. Leeper

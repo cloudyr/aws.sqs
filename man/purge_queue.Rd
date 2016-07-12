@@ -7,22 +7,18 @@
 purge_queue(queue, ...)
 }
 \arguments{
-\item{queue}{A character string containing a queue URL, or the name of the
-queue.}
+\item{queue}{A character string containing a queue URL, or the name of the queue.}
 
 \item{...}{Additional arguments passed to \code{\link{sqsHTTP}}.}
 }
 \value{
-If successful, a logical \code{TRUE} value. Otherwise, a data
-structure of class \dQuote{aws_error} containing any error message(s) from
-AWS and information about the request attempt.
+If successful, a logical \code{TRUE} value. Otherwise, a data structure of class \dQuote{aws_error} containing any error message(s) from AWS and information about the request attempt.
 }
 \description{
 Purge an SQS queue of its message
 }
 \details{
-Purge an SQS queue of its messages, without deleting it. Use
-\code{\link{delete_queue}} to delete the queue entirely.
+Purge an SQS queue of its messages, without deleting it. Use \code{\link{delete_queue}} to delete the queue entirely.
 }
 \author{
 Thomas J. Leeper

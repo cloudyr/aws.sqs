@@ -7,8 +7,7 @@
 delete_msg(queue, handle, ...)
 }
 \arguments{
-\item{queue}{A character string containing a queue URL, or the name of the
-queue.}
+\item{queue}{A character string containing a queue URL, or the name of the queue.}
 
 \item{handle}{A message handle, as returned by \code{\link{receive_msg}}.}
 
@@ -21,9 +20,7 @@ If operation succeeds, a logical \code{TRUE}.
 Delete one or more messages from an SQS queue
 }
 \details{
-Delete one or more messages from an SQS queue. If a message is not deleted,
-it remains visible in the queue and will be returned by subsequent calls to
-\code{\link{receive_msg}}.
+Delete one or more messages from an SQS queue. If a message is not deleted, it remains visible in the queue and will be returned by subsequent calls to \code{\link{receive_msg}}.
 }
 \author{
 Thomas J. Leeper

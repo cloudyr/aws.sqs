@@ -3,27 +3,12 @@
 #' @title Queue Attributes
 #' @description Get and set queue attributes
 #' @details Get or set the attributes for a queue.
-#' @param queue A character string containing a queue URL, or the name of the
-#' queue.
-#' @param attributes For \code{get_queue_attrs}, a vector of attribute names to
-#' return. For \code{set_queue_attrs}, a named character vector or named list
-#' of attributes and their values (as character strings). Allowed attributes
-#' are: \dQuote{Policy}, \dQuote{VisibilityTimeout},
-#' \dQuote{MaximumMessageSize}, \dQuote{MessageRetentionPeriod},
-#' \dQuote{ApproximateNumberOfMessages},
-#' \dQuote{ApproximateNumberOfMessagesNotVisible}, \dQuote{CreatedTimestamp},
-#' \dQuote{LastModifiedTimestamp}, \dQuote{QueueArn},
-#' \dQuote{ApproximateNumberOfMessagesDelayed}, \dQuote{DelaySeconds},
-#' \dQuote{ReceiveMessageWaitTimeSeconds}, \dQuote{RedrivePolicy}.
+#' @param queue A character string containing a queue URL, or the name of the queue.
+#' @param attributes For \code{get_queue_attrs}, a vector of attribute names to return. For \code{set_queue_attrs}, a named character vector or named list of attributes and their values (as character strings). Allowed attributes are: \dQuote{Policy}, \dQuote{VisibilityTimeout}, \dQuote{MaximumMessageSize}, \dQuote{MessageRetentionPeriod}, \dQuote{ApproximateNumberOfMessages}, \dQuote{ApproximateNumberOfMessagesNotVisible}, \dQuote{CreatedTimestamp}, \dQuote{LastModifiedTimestamp}, \dQuote{QueueArn}, \dQuote{ApproximateNumberOfMessagesDelayed}, \dQuote{DelaySeconds}, \dQuote{ReceiveMessageWaitTimeSeconds}, \dQuote{RedrivePolicy}.
 #' @param ... Additional arguments passed to \code{\link{sqsHTTP}}.
-#' @return For \code{get_queue_attrs}, a named list of queue attributes.
-#' Otherwise, a data structure of class \dQuote{aws_error} containing any error
-#' message(s) from AWS and information about the request attempt.
+#' @return For \code{get_queue_attrs}, a named list of queue attributes. Otherwise, a data structure of class \dQuote{aws_error} containing any error message(s) from AWS and information about the request attempt.
 #' 
-#' For \code{set_queue_attrs}, a logical \code{TRUE} if operation was
-#' successful. Otherwise, a data structure of class \dQuote{aws_error}
-#' containing any error message(s) from AWS and information about the request
-#' attempt.
+#' For \code{set_queue_attrs}, a logical \code{TRUE} if operation was successful. Otherwise, a data structure of class \dQuote{aws_error} containing any error message(s) from AWS and information about the request attempt.
 #' @author Thomas J. Leeper
 #' @seealso \code{link{create_queue}}
 #' @references
@@ -64,25 +49,18 @@ set_queue_attrs <- function(queue, attributes, ...) {
               RequestId = out$SetQueueAttributesResponse$ResponseMetadata$RequestId)
 }
 
-#' Get a queue URL
-#' 
-#' Get a queue URL by name
-#' 
-#' Retrieves the URL for an SQS queue by its name.
-#' 
+#' @title Get a queue URL
 #' @aliases get_queue_url
+#' @description Retrieves the URL for an SQS queue by its name.
 #' @param name A character string containing the name of the queue.
-#' @param owner A character string containing the AWS Account ID that created
-#' the queue.
+#' @param owner A character string containing the AWS Account ID that created the queue.
 #' @param ... Additional arguments passed to \code{\link{sqsHTTP}}.
-#' @return If successful, a character string containing an SQS Queue URL.
-#' Otherwise, a data structure of class \dQuote{aws_error} containing any error
-#' message(s) from AWS and information about the request attempt.
+#' @return If successful, a character string containing an SQS Queue URL. Otherwise, a data structure of class \dQuote{aws_error} containing any error message(s) from AWS and information about the request attempt.
 #' @author Thomas J. Leeper
-#' @seealso \code{link{create_queue}} \code{link{delete_queue}}
-#' \code{\link{get_queue_attrs}} \code{\link{set_queue_attrs}}
+#' @seealso \code{link{create_queue}} \code{link{delete_queue}} \code{\link{get_queue_attrs}} \code{\link{set_queue_attrs}}
 #' @references
 #' \href{http://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_GetQueueUrl.html}{GetQueueURL}
+#' @export
 get_queue_url <- function(name, owner = NULL, ...) {
     query_args <- list(Action = "GetQueueUrl", QueueName = name)
     if (!is.null(owner)) {

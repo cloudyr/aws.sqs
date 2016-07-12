@@ -14,9 +14,7 @@ create_queue(name, attributes = NULL, ...)
 \item{...}{Additional arguments passed to \code{\link{sqsHTTP}}.}
 }
 \value{
-If successful, a character string containing an SQS Queue URL.
-Otherwise, a data structure of class \dQuote{aws_error} containing any error
-message(s) from AWS and information about the request attempt.
+If successful, a character string containing an SQS Queue URL. Otherwise, a data structure of class \dQuote{aws_error} containing any error message(s) from AWS and information about the request attempt.
 }
 \description{
 Create an SQS queue
@@ -31,7 +29,6 @@ Thomas J. Leeper
 \href{http://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_CreateQueue.html}{CreateQueue}
 }
 \seealso{
-\code{link{delete_queue}} \code{\link{get_queue_attrs}}
-\code{\link{set_queue_attrs}}
+\code{link{delete_queue}} \code{\link{get_queue_attrs}} \code{\link{set_queue_attrs}}
 }
 

@@ -10,20 +10,13 @@ add_permission(queue, label, principal, action, ...)
 remove_permission(queue, label, ...)
 }
 \arguments{
-\item{queue}{A character string containing a queue URL, or the name of the
-queue.}
+\item{queue}{A character string containing a queue URL, or the name of the queue.}
 
-\item{label}{A character string containing a unique label for the
-permission.}
+\item{label}{A character string containing a unique label for the permission.}
 
-\item{principal}{A character vector containing the AWS account number of the
-principal who will be given permission. Principals and actions must be
-specified one-to-one or one-to-many.}
+\item{principal}{A character vector containing the AWS account number of the principal who will be given permission. Principals and actions must be specified one-to-one or one-to-many.}
 
-\item{action}{A character vector containing an SQS permission. Valid values
-include: \dQuote{*}, \dQuote{SendMessage}, \dQuote{ReceiveMessage},
-\dQuote{DeleteMessage}, \dQuote{ChangeMessageVisibility},
-\dQuote{GetQueueAttributes}, \dQuote{GetQueueUrl}.}
+\item{action}{A character vector containing an SQS permission. Valid values include: \dQuote{*}, \dQuote{SendMessage}, \dQuote{ReceiveMessage}, \dQuote{DeleteMessage}, \dQuote{ChangeMessageVisibility}, \dQuote{GetQueueAttributes}, \dQuote{GetQueueUrl}.}
 
 \item{...}{Additional arguments passed to \code{\link{sqsHTTP}}.}
 }
@@ -44,7 +37,6 @@ Thomas J. Leeper
 \href{http://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_RemovePermission.html}{RemovePermission}
 }
 \seealso{
-\code{link{create_queue}} \code{\link{get_queue_attrs}}
-\code{\link{set_queue_attrs}}
+\code{link{create_queue}} \code{\link{get_queue_attrs}} \code{\link{set_queue_attrs}}
 }
 

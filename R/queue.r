@@ -5,12 +5,9 @@
 #' @param name A character string containing a name for the queue.
 #' @param attributes Currently ignored
 #' @param ... Additional arguments passed to \code{\link{sqsHTTP}}.
-#' @return If successful, a character string containing an SQS Queue URL.
-#' Otherwise, a data structure of class \dQuote{aws_error} containing any error
-#' message(s) from AWS and information about the request attempt.
+#' @return If successful, a character string containing an SQS Queue URL. Otherwise, a data structure of class \dQuote{aws_error} containing any error message(s) from AWS and information about the request attempt.
 #' @author Thomas J. Leeper
-#' @seealso \code{link{delete_queue}} \code{\link{get_queue_attrs}}
-#' \code{\link{set_queue_attrs}}
+#' @seealso \code{link{delete_queue}} \code{\link{get_queue_attrs}} \code{\link{set_queue_attrs}}
 #' @references
 #' \href{http://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_CreateQueue.html}{CreateQueue}
 #' @export
@@ -26,14 +23,10 @@ create_queue <- function(name, attributes = NULL, ...) {
 #' @title Delete a queue
 #' @aliases delete_queue
 #' @description Delete an SQS queue
-#' @details Delete an SQS queue. Use \code{\link{purge_queue}} to remove all messages
-#' from a queue without deleting it.
-#' @param queue A character string containing a queue URL, or the name of the
-#' queue.
+#' @details Delete an SQS queue. Use \code{\link{purge_queue}} to remove all messages from a queue without deleting it.
+#' @param queue A character string containing a queue URL, or the name of the queue.
 #' @param ... Additional arguments passed to \code{\link{sqsHTTP}}.
-#' @return If successful, a logical \code{TRUE} value. Otherwise, a data
-#' structure of class \dQuote{aws_error} containing any error message(s) from
-#' AWS and information about the request attempt.
+#' @return If successful, a logical \code{TRUE} value. Otherwise, a data structure of class \dQuote{aws_error} containing any error message(s) from AWS and information about the request attempt.
 #' @author Thomas J. Leeper
 #' @seealso \code{link{create_queue}} \code{\link{purge_queue}}
 #' @references
@@ -49,21 +42,17 @@ delete_queue <- function(queue, ...) {
 }
 
 #' @title Purge a queue
-#' @description Purge an SQS queue of its message
-#' @details Purge an SQS queue of its messages, without deleting it. Use
-#' \code{\link{delete_queue}} to delete the queue entirely.
-#' 
 #' @aliases purge_queue
-#' @param queue A character string containing a queue URL, or the name of the
-#' queue.
+#' @description Purge an SQS queue of its message
+#' @details Purge an SQS queue of its messages, without deleting it. Use \code{\link{delete_queue}} to delete the queue entirely.
+#' @param queue A character string containing a queue URL, or the name of the queue.
 #' @param ... Additional arguments passed to \code{\link{sqsHTTP}}.
-#' @return If successful, a logical \code{TRUE} value. Otherwise, a data
-#' structure of class \dQuote{aws_error} containing any error message(s) from
-#' AWS and information about the request attempt.
+#' @return If successful, a logical \code{TRUE} value. Otherwise, a data structure of class \dQuote{aws_error} containing any error message(s) from AWS and information about the request attempt.
 #' @author Thomas J. Leeper
 #' @seealso \code{link{create_queue}} \code{\link{delete_queue}}
 #' @references
 #' \href{http://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_PurgeeQueue.html}{PurgeQueue}
+#' @export
 purge_queue <- function(queue, ...) {
     queue <- .urlFromName(queue)
     out <- sqsHTTP(url = queue, query = list(Action = "PurgeQueue"), ...)
