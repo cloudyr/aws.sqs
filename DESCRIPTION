@@ -1,8 +1,8 @@
 Package: aws.sqs
 Type: Package
 Title: AWS SQS Client Package
-Version: 0.1.5
-Date: 2016-03-17
+Version: 0.1.6
+Date: 2016-07-14
 Author: Thomas J. Leeper
 Maintainer: Thomas J. Leeper <thosjleeper@gmail.com>
 Description: A simple client package for the Amazon Web Services (AWS) Simple

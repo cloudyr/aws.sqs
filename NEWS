@@ -1,3 +1,7 @@
+# CHANGES TO aws.sqs 0.1.6 #
+
+* Fixed a typo in `get_queue_attrs()` that was preventing return of attributes. (h/t Dinesh Mistry)
+
 # CHANGES TO aws.sqs 0.1.4 #
 
 * Fixed a bug in `delete_msg()` that was preventing message deletion. (#4)

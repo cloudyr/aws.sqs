@@ -17,7 +17,7 @@ set_queue_attrs(queue, attributes, ...)
 \item{...}{Additional arguments passed to \code{\link{sqsHTTP}}.}
 }
 \value{
-For \code{get_queue_attrs}, a named list of queue attributes. Otherwise, a data structure of class \dQuote{aws_error} containing any error message(s) from AWS and information about the request attempt.
+For \code{get_queue_attrs}, a data.frame list of queue attributes. Otherwise, a data structure of class \dQuote{aws_error} containing any error message(s) from AWS and information about the request attempt.
 
 For \code{set_queue_attrs}, a logical \code{TRUE} if operation was successful. Otherwise, a data structure of class \dQuote{aws_error} containing any error message(s) from AWS and information about the request attempt.
 }

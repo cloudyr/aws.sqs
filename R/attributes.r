@@ -6,7 +6,7 @@
 #' @param queue A character string containing a queue URL, or the name of the queue.
 #' @param attributes For \code{get_queue_attrs}, a vector of attribute names to return. For \code{set_queue_attrs}, a named character vector or named list of attributes and their values (as character strings). Allowed attributes are: \dQuote{Policy}, \dQuote{VisibilityTimeout}, \dQuote{MaximumMessageSize}, \dQuote{MessageRetentionPeriod}, \dQuote{ApproximateNumberOfMessages}, \dQuote{ApproximateNumberOfMessagesNotVisible}, \dQuote{CreatedTimestamp}, \dQuote{LastModifiedTimestamp}, \dQuote{QueueArn}, \dQuote{ApproximateNumberOfMessagesDelayed}, \dQuote{DelaySeconds}, \dQuote{ReceiveMessageWaitTimeSeconds}, \dQuote{RedrivePolicy}.
 #' @param ... Additional arguments passed to \code{\link{sqsHTTP}}.
-#' @return For \code{get_queue_attrs}, a named list of queue attributes. Otherwise, a data structure of class \dQuote{aws_error} containing any error message(s) from AWS and information about the request attempt.
+#' @return For \code{get_queue_attrs}, a data.frame list of queue attributes. Otherwise, a data structure of class \dQuote{aws_error} containing any error message(s) from AWS and information about the request attempt.
 #' 
 #' For \code{set_queue_attrs}, a logical \code{TRUE} if operation was successful. Otherwise, a data structure of class \dQuote{aws_error} containing any error message(s) from AWS and information about the request attempt.
 #' @author Thomas J. Leeper
@@ -18,15 +18,13 @@ get_queue_attrs <- function(queue, attributes = "All", ...) {
     queue <- .urlFromName(queue)
     query_args <- list(Action = "GetQueueAttributes")
     a <- as.list(attributes)
-    names(a) <- paste0("Attribute.Name.",1:length(a))
+    names(a) <- paste0("AttributeName.",1:length(a))
     query_args <- c(query_args, a)
     out <- sqsHTTP(queue, query = query_args, ...)
     if (inherits(out, "aws-error") || inherits(out, "unknown")) {
         return(out)
     }
-    x <- out$GetQueueAttributesResponse$GetQueueAttributesResult
-    result <- setNames(sapply(x, `[[`, "Value"), sapply(x, `[[`, "Name"))
-    structure(result,
+    structure(out[["GetQueueAttributesResponse"]][["GetQueueAttributesResult"]][["Attributes"]],
               RequestId = out$GetQueueAttributesResponse$ResponseMetadata$RequestId)
 }
 
