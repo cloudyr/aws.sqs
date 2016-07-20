@@ -5,9 +5,9 @@
 \alias{remove_permission}
 \title{Change queue permissions}
 \usage{
-add_permission(queue, label, principal, action, ...)
+add_permission(queue, label, principal, action, query = NULL, ...)
 
-remove_permission(queue, label, ...)
+remove_permission(queue, label, query = NULL, ...)
 }
 \arguments{
 \item{queue}{A character string containing a queue URL, or the name of the queue.}
@@ -17,6 +17,8 @@ remove_permission(queue, label, ...)
 \item{principal}{A character vector containing the AWS account number of the principal who will be given permission. Principals and actions must be specified one-to-one or one-to-many.}
 
 \item{action}{A character vector containing an SQS permission. Valid values include: \dQuote{*}, \dQuote{SendMessage}, \dQuote{ReceiveMessage}, \dQuote{DeleteMessage}, \dQuote{ChangeMessageVisibility}, \dQuote{GetQueueAttributes}, \dQuote{GetQueueUrl}.}
+
+\item{query}{A list specifying additional query arguments to be passed to the \code{query} argument of \code{\link{sqsHTTP}}.}
 
 \item{...}{Additional arguments passed to \code{\link{sqsHTTP}}.}
 }

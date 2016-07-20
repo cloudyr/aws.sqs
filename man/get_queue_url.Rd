@@ -4,12 +4,14 @@
 \alias{get_queue_url}
 \title{Get a queue URL}
 \usage{
-get_queue_url(name, owner = NULL, ...)
+get_queue_url(name, owner = NULL, query = NULL, ...)
 }
 \arguments{
 \item{name}{A character string containing the name of the queue.}
 
 \item{owner}{A character string containing the AWS Account ID that created the queue.}
+
+\item{query}{A list specifying additional query arguments to be passed to the \code{query} argument of \code{\link{sqsHTTP}}.}
 
 \item{...}{Additional arguments passed to \code{\link{sqsHTTP}}.}
 }

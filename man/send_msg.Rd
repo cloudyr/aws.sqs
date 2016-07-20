@@ -4,7 +4,7 @@
 \alias{send_msg}
 \title{send_msg}
 \usage{
-send_msg(queue, msg, attributes = NULL, delay = NULL, ...)
+send_msg(queue, msg, attributes = NULL, delay = NULL, query = NULL, ...)
 }
 \arguments{
 \item{queue}{A character string containing a queue URL, or the name of the queue.}
@@ -14,6 +14,8 @@ send_msg(queue, msg, attributes = NULL, delay = NULL, ...)
 \item{attributes}{Currently ignored. (If \code{msg} is of length one, a specification of message attributes. Ignored otherwise.)}
 
 \item{delay}{A numeric value indicating the number of seconds between 0 and 900 to delay a specific message. If \code{NULL}, the default value for the queue applies.}
+
+\item{query}{A list specifying additional query arguments to be passed to the \code{query} argument of \code{\link{sqsHTTP}}.}
 
 \item{...}{Additional arguments passed to \code{\link{sqsHTTP}}.}
 }

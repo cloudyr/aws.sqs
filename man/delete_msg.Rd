@@ -4,12 +4,14 @@
 \alias{delete_msg}
 \title{delete_msg}
 \usage{
-delete_msg(queue, handle, ...)
+delete_msg(queue, handle, query = NULL, ...)
 }
 \arguments{
 \item{queue}{A character string containing a queue URL, or the name of the queue.}
 
 \item{handle}{A message handle, as returned by \code{\link{receive_msg}}.}
+
+\item{query}{A list specifying additional query arguments to be passed to the \code{query} argument of \code{\link{sqsHTTP}}.}
 
 \item{...}{Additional arguments passed to \code{\link{sqsHTTP}}.}
 }

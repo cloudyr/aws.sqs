@@ -5,14 +5,16 @@
 \alias{set_queue_attrs}
 \title{Queue Attributes}
 \usage{
-get_queue_attrs(queue, attributes = "All", ...)
+get_queue_attrs(queue, attributes = "All", query = NULL, ...)
 
-set_queue_attrs(queue, attributes, ...)
+set_queue_attrs(queue, attributes, query = NULL, ...)
 }
 \arguments{
 \item{queue}{A character string containing a queue URL, or the name of the queue.}
 
 \item{attributes}{For \code{get_queue_attrs}, a vector of attribute names to return. For \code{set_queue_attrs}, a named character vector or named list of attributes and their values (as character strings). Allowed attributes are: \dQuote{Policy}, \dQuote{VisibilityTimeout}, \dQuote{MaximumMessageSize}, \dQuote{MessageRetentionPeriod}, \dQuote{ApproximateNumberOfMessages}, \dQuote{ApproximateNumberOfMessagesNotVisible}, \dQuote{CreatedTimestamp}, \dQuote{LastModifiedTimestamp}, \dQuote{QueueArn}, \dQuote{ApproximateNumberOfMessagesDelayed}, \dQuote{DelaySeconds}, \dQuote{ReceiveMessageWaitTimeSeconds}, \dQuote{RedrivePolicy}.}
+
+\item{query}{A list specifying additional query arguments to be passed to the \code{query} argument of \code{\link{sqsHTTP}}.}
 
 \item{...}{Additional arguments passed to \code{\link{sqsHTTP}}.}
 }

@@ -4,12 +4,14 @@
 \alias{create_queue}
 \title{Create a queue}
 \usage{
-create_queue(name, attributes = NULL, ...)
+create_queue(name, attributes = NULL, query = NULL, ...)
 }
 \arguments{
 \item{name}{A character string containing a name for the queue.}
 
 \item{attributes}{Currently ignored}
+
+\item{query}{A list specifying additional query arguments to be passed to the \code{query} argument of \code{\link{sqsHTTP}}.}
 
 \item{...}{Additional arguments passed to \code{\link{sqsHTTP}}.}
 }

@@ -5,11 +5,12 @@
 \alias{list_queues}
 \title{List queues}
 \usage{
-list_queues(starts_with = NULL, ...)
+list_queues(starts_with = NULL, query = NULL, ...)
 }
 \arguments{
-\item{starts_with}{An optional character string describing the beginning of
-the name of queues to retrieve.}
+\item{starts_with}{An optional character string describing the beginning of the name of queues to retrieve.}
+
+\item{query}{A list specifying additional query arguments to be passed to the \code{query} argument of \code{\link{sqsHTTP}}.}
 
 \item{...}{Additional arguments passed to \code{\link{sqsHTTP}}.}
 }

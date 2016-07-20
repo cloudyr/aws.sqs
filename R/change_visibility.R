@@ -4,6 +4,7 @@
 #' @param queue A character string containing a queue URL, or the name of the queue.
 #' @param handle A character vector containing one or more message handles, as returned by \code{\link{receive_msg}}.
 #' @param timeout An integer value indicating the new value of the visibility timeout, in seconds between 0 and 43200, for the message(s).
+#' @param query A list specifying additional query arguments to be passed to the \code{query} argument of \code{\link{sqsHTTP}}.
 #' @param ... Additional arguments passed to \code{\link{sqsHTTP}}.
 #' @return If successful, a logical \code{TRUE}. Otherwise, a data structure of class \dQuote{aws_error} containing any error message(s) from AWS and information about the request attempt.
 #' @author Thomas J. Leeper
@@ -11,7 +12,7 @@
 #' @references
 #' \href{http://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_ChangeMessageVisibility.html}{ChangeMessageVisibility}
 #' @export
-visibility <- function(queue, handle, timeout = NULL, ...) {
+visibility <- function(queue, handle, timeout = NULL, query = NULL, ...) {
     queue <- .urlFromName(queue)
     if (length(handle) > 1) {
         # batch mode
@@ -39,7 +40,7 @@ visibility <- function(queue, handle, timeout = NULL, ...) {
             query_args$VisibilityTimeout <- timeout
         }
     }
-    out <- sqsHTTP(url = queue, query = query_args, ...)
+    out <- sqsHTTP(url = queue, query = c(query, query_args), ...)
     if (inherits(out, "aws-error")) {
         return(out)
     }

@@ -4,10 +4,12 @@
 \alias{delete_queue}
 \title{Delete a queue}
 \usage{
-delete_queue(queue, ...)
+delete_queue(queue, query = NULL, ...)
 }
 \arguments{
 \item{queue}{A character string containing a queue URL, or the name of the queue.}
+
+\item{query}{A list specifying additional query arguments to be passed to the \code{query} argument of \code{\link{sqsHTTP}}.}
 
 \item{...}{Additional arguments passed to \code{\link{sqsHTTP}}.}
 }

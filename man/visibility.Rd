@@ -4,7 +4,7 @@
 \alias{visibility}
 \title{Change Visiblity Timeout}
 \usage{
-visibility(queue, handle, timeout = NULL, ...)
+visibility(queue, handle, timeout = NULL, query = NULL, ...)
 }
 \arguments{
 \item{queue}{A character string containing a queue URL, or the name of the queue.}
@@ -12,6 +12,8 @@ visibility(queue, handle, timeout = NULL, ...)
 \item{handle}{A character vector containing one or more message handles, as returned by \code{\link{receive_msg}}.}
 
 \item{timeout}{An integer value indicating the new value of the visibility timeout, in seconds between 0 and 43200, for the message(s).}
+
+\item{query}{A list specifying additional query arguments to be passed to the \code{query} argument of \code{\link{sqsHTTP}}.}
 
 \item{...}{Additional arguments passed to \code{\link{sqsHTTP}}.}
 }
