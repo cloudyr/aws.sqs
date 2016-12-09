@@ -1,8 +1,9 @@
 #' @rdname receive_msg
 #' @title Receive messages
 #' @description Receive one or more messages from an SQS queue.
-#' @details \code{receive_msg} simply receives message(s). \code{consume_msg} does the same and then deletes the message(s) from the queue.
+#' @details \code{receive_msg} simply receives message(s). \code{consume_msg} does the same and then deletes the message(s) from the queue. \code{delete_message} deletes one or more messages from an SQS queue. If a message is not deleted, it remains visible in the queue and will be returned by subsequent calls to \code{\link{receive_msg}}.
 #' @param queue A character string containing a queue URL, or the name of the queue.
+#' @param handle A message handle, as returned by \code{\link{receive_msg}}.
 #' @param attributes Currently ignored.
 #' @param n The number of messages to retrieve (maximum 10).
 #' @param timeout A number of seconds to make the message invisible to subsequent \code{receive_msg} requests. This modifies the queue's default visibility timeout. See \code{\link{visibility}} to modify this value after receiving a message.
@@ -11,9 +12,32 @@
 #' @param ... Additional arguments passed to \code{\link{sqsHTTP}}.
 #' @return A data.frame of messages.
 #' @author Thomas J. Leeper
-#' @seealso \code{link{send_msg}} \code{link{delete_msg}}
+#' @examples
+#' \dontrun{
+#'   # list current queues
+#'   list_queues()
+#'   
+#'   # create a queue
+#'   queue <- create_queue("ExampleQueue")
+#'   get_queue_url("ExampleQueue")
+#'   
+#'   # send message to queue
+#'   send_msg("ExampleQueue", "This is a test message")
+#'   # receive a message
+#'   (m <- receive_msg("ExampleQueue", timeout = 0))
+#'   
+#'   # delete a message from queue
+#'   delete_msg("ExampleQueue", m$ReceiptHandle[1])
+#'   
+#'   # delete queue
+#'   delete_queue("ExampleQueue")
+#'   
+#' }
+#' @seealso \code{link{send_msg}}
 #' @references
 #' \href{http://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_ReceiveMessage.html}{ReceiveMessage}
+#' \href{http://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_DeleteMessage.html}{DeleteMessage}
+#' \href{http://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_DeleteMessageBatch.html}{DeleteMessageBatch}
 #' @export
 receive_msg <- function(queue, attributes = NULL, n = 1, timeout = NULL, wait = NULL, query = NULL, ...) {
     queue <- .urlFromName(queue)
@@ -56,7 +80,7 @@ receive_msg <- function(queue, attributes = NULL, n = 1, timeout = NULL, wait = 
 
 #' @rdname receive_msg
 #' @param receive_args A named list of arguments, other than \code{queue}, to be passed to \code{receive_msg}.
-#' @param delete_args A named list of arguments, other than \code{queue} and \code{handle}, to be passed to \code{\link{delete_msg}}.
+#' @param delete_args A named list of arguments, other than \code{queue} and \code{handle}, to be passed to \code{delete_msg}.
 #' @export
 consume_msg <- function(queue, receive_args = list(), delete_args = list()) {
     m <- do.call("receive_msg", c(receive_args, list(queue = queue)))
@@ -64,21 +88,7 @@ consume_msg <- function(queue, receive_args = list(), delete_args = list()) {
     m
 }
 
-
-#' @title delete_msg
-#' @description Delete one or more messages from an SQS queue
-#' @details Delete one or more messages from an SQS queue. If a message is not deleted, it remains visible in the queue and will be returned by subsequent calls to \code{\link{receive_msg}}.
-#' @param queue A character string containing a queue URL, or the name of the queue.
-#' @param handle A message handle, as returned by \code{\link{receive_msg}}.
-#' @param query A list specifying additional query arguments to be passed to the \code{query} argument of \code{\link{sqsHTTP}}.
-#' @param ... Additional arguments passed to \code{\link{sqsHTTP}}.
-#' @return If operation succeeds, a logical \code{TRUE}.
-#' @author Thomas J. Leeper
-#' @seealso \code{link{receive_msg}}
-#' @references
-#' \href{http://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_DeleteMessage.html}{DeleteMessage}
-#' 
-#' \href{http://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_DeleteMessageBatch.html}{DeleteMessageBatch}
+#' @rdname receive_msg
 #' @export
 delete_msg <- function(queue, handle, query = NULL, ...) {
     queue <- .urlFromName(queue)
@@ -114,6 +124,27 @@ delete_msg <- function(queue, handle, query = NULL, ...) {
 #' @param ... Additional arguments passed to \code{\link{sqsHTTP}}.
 #' @return A list of message information, including the MessageId and an MD5 checksum of the message body.
 #' @author Thomas J. Leeper
+#' @examples
+#' \dontrun{
+#'   # list current queues
+#'   list_queues()
+#'   
+#'   # create a queue
+#'   queue <- create_queue("ExampleQueue")
+#'   get_queue_url("ExampleQueue")
+#'   
+#'   # send message to queue
+#'   send_msg("ExampleQueue", "This is a test message")
+#'   # receive a message
+#'   (m <- receive_msg("ExampleQueue", timeout = 0))
+#'   
+#'   # delete a message from queue
+#'   delete_msg("ExampleQueue", m$ReceiptHandle[1])
+#'   
+#'   # delete queue
+#'   delete_queue("ExampleQueue")
+#'   
+#' }
 #' @seealso \code{link{receive_msg}} \code{link{delete_msg}}
 #' @references
 #' \href{http://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_SendMessage.html}{SendMessage}

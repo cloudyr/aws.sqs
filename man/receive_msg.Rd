@@ -2,6 +2,7 @@
 % Please edit documentation in R/messages.R
 \name{receive_msg}
 \alias{consume_msg}
+\alias{delete_msg}
 \alias{receive_msg}
 \title{Receive messages}
 \usage{
@@ -9,6 +10,8 @@ receive_msg(queue, attributes = NULL, n = 1, timeout = NULL,
   wait = NULL, query = NULL, ...)
 
 consume_msg(queue, receive_args = list(), delete_args = list())
+
+delete_msg(queue, handle, query = NULL, ...)
 }
 \arguments{
 \item{queue}{A character string containing a queue URL, or the name of the queue.}
@@ -27,7 +30,9 @@ consume_msg(queue, receive_args = list(), delete_args = list())
 
 \item{receive_args}{A named list of arguments, other than \code{queue}, to be passed to \code{receive_msg}.}
 
-\item{delete_args}{A named list of arguments, other than \code{queue} and \code{handle}, to be passed to \code{\link{delete_msg}}.}
+\item{delete_args}{A named list of arguments, other than \code{queue} and \code{handle}, to be passed to \code{delete_msg}.}
+
+\item{handle}{A message handle, as returned by \code{\link{receive_msg}}.}
 }
 \value{
 A data.frame of messages.
@@ -36,15 +41,39 @@ A data.frame of messages.
 Receive one or more messages from an SQS queue.
 }
 \details{
-\code{receive_msg} simply receives message(s). \code{consume_msg} does the same and then deletes the message(s) from the queue.
+\code{receive_msg} simply receives message(s). \code{consume_msg} does the same and then deletes the message(s) from the queue. \code{delete_message} deletes one or more messages from an SQS queue. If a message is not deleted, it remains visible in the queue and will be returned by subsequent calls to \code{\link{receive_msg}}.
+}
+\examples{
+\dontrun{
+  # list current queues
+  list_queues()
+  
+  # create a queue
+  queue <- create_queue("ExampleQueue")
+  get_queue_url("ExampleQueue")
+  
+  # send message to queue
+  send_msg("ExampleQueue", "This is a test message")
+  # receive a message
+  (m <- receive_msg("ExampleQueue", timeout = 0))
+  
+  # delete a message from queue
+  delete_msg("ExampleQueue", m$ReceiptHandle[1])
+  
+  # delete queue
+  delete_queue("ExampleQueue")
+  
+}
 }
 \author{
 Thomas J. Leeper
 }
 \references{
 \href{http://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_ReceiveMessage.html}{ReceiveMessage}
+\href{http://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_DeleteMessage.html}{DeleteMessage}
+\href{http://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_DeleteMessageBatch.html}{DeleteMessageBatch}
 }
 \seealso{
-\code{link{send_msg}} \code{link{delete_msg}}
+\code{link{send_msg}}
 }
 

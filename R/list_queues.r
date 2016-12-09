@@ -14,6 +14,11 @@
 #' a data structure of class \dQuote{aws_error} containing any error message(s)
 #' from AWS and information about the request attempt.
 #' @author Thomas J. Leeper
+#' @examples
+#' \dontrun{
+#'   # list current queues
+#'   list_queues()
+#' }
 #' @references
 #' \href{http://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_ListQueues.html}{ListQueues}
 #' \href{http://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_ListDeadLetterSourceQueues.html}{ListDeadLetterSourceQueues}

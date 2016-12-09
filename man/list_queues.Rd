@@ -29,6 +29,12 @@ account, or only those starting with a particular character string.
 For \code{deadletter_queues}, a list of all SQS queues with a RedrivePolicy
 queue attribute configured with a dead letter queue.
 }
+\examples{
+\dontrun{
+  # list current queues
+  list_queues()
+}
+}
 \author{
 Thomas J. Leeper
 }
