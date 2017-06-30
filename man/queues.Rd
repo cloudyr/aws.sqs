@@ -51,9 +51,6 @@ Create or delete an SQS queue
   
 }
 }
-\author{
-Thomas J. Leeper
-}
 \references{
 \href{http://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_CreateQueue.html}{CreateQueue}
 \href{http://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_DeleteQueue.html}{DeleteQueue}
@@ -61,4 +58,6 @@ Thomas J. Leeper
 \seealso{
 \code{\link{get_queue_attrs}} \code{\link{set_queue_attrs}} \code{link{purge_queue}}
 }
-
+\author{
+Thomas J. Leeper
+}

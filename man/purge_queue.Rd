@@ -22,13 +22,12 @@ Purge an SQS queue of its message
 \details{
 Purge an SQS queue of its messages, without deleting it. Use \code{\link{delete_queue}} to delete the queue entirely.
 }
-\author{
-Thomas J. Leeper
-}
 \references{
 \href{http://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_PurgeeQueue.html}{PurgeQueue}
 }
 \seealso{
 \code{link{create_queue}} \code{\link{delete_queue}}
 }
-
+\author{
+Thomas J. Leeper
+}

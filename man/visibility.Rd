@@ -26,13 +26,12 @@ Change the visibility timeout of received message(s)
 \details{
 Changes the visibility timeout of one or more SQS messages, by their message handle.
 }
-\author{
-Thomas J. Leeper
-}
 \references{
 \href{http://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_ChangeMessageVisibility.html}{ChangeMessageVisibility}
 }
 \seealso{
 \code{link{receive_msg}} \code{link{delete_msg}}
 }
-
+\author{
+Thomas J. Leeper
+}

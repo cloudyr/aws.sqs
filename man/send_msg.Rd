@@ -47,9 +47,6 @@ Send a message to an SQS queue
   
 }
 }
-\author{
-Thomas J. Leeper
-}
 \references{
 \href{http://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_SendMessage.html}{SendMessage}
 \href{http://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_SendMessageBatch.html}{SendMessageBatch}
@@ -57,4 +54,6 @@ Thomas J. Leeper
 \seealso{
 \code{link{receive_msg}} \code{link{delete_msg}}
 }
-
+\author{
+Thomas J. Leeper
+}

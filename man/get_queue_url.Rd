@@ -21,13 +21,12 @@ If successful, a character string containing an SQS Queue URL. Otherwise, a data
 \description{
 Retrieves the URL for an SQS queue by its name.
 }
-\author{
-Thomas J. Leeper
-}
 \references{
 \href{http://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_GetQueueUrl.html}{GetQueueURL}
 }
 \seealso{
 \code{link{create_queue}} \code{link{delete_queue}} \code{\link{get_queue_attrs}} \code{\link{set_queue_attrs}}
 }
-
+\author{
+Thomas J. Leeper
+}

@@ -4,9 +4,9 @@
 #' @param url A character string containing an SQS API endpoint URL.
 #' @param query An optional named list containing query string parameters and their character values.
 #' @param region A character string containing an AWS region. If missing, the default \dQuote{us-east-1} is used.
-#' @param key A character string containing an AWS Access Key ID. The default is pulled from environment variable \dQuote{AWS_ACCESS_KEY_ID}.
-#' @param secret A character string containing an AWS Secret Access Key. The default is pulled from environment variable \dQuote{AWS_SECRET_ACCESS_KEY}.
-#' @param session_token Optionally, a character string containing an AWS temporary Session Token. If missing, defaults to value stored in environment variable \dQuote{AWS_SESSION_TOKEN}.
+#' @param key A character string containing an AWS Access Key ID. See \code{\link[aws.signature]{locate_credentials}}.
+#' @param secret A character string containing an AWS Secret Access Key. See \code{\link[aws.signature]{locate_credentials}}.
+#' @param session_token Optionally, a character string containing an AWS temporary Session Token. See \code{\link[aws.signature]{locate_credentials}}.
 #' @param ... Additional arguments passed to \code{\link[httr]{GET}}.
 #' @return If successful, a named list. Otherwise, a data structure of class
 #' \dQuote{aws_error} containing any error message(s) from AWS and information
@@ -20,9 +20,9 @@
 sqsHTTP <- function(url = NULL, 
                     query = list(), 
                     region = Sys.getenv("AWS_DEFAULT_REGION", "us-east-1"), 
-                    key = Sys.getenv("AWS_ACCESS_KEY_ID"), 
-                    secret = Sys.getenv("AWS_SECRET_ACCESS_KEY"), 
-                    session_token = Sys.getenv("AWS_SESSION_TOKEN"),
+                    key = NULL, 
+                    secret = NULL, 
+                    session_token = NULL,
                     ...) {
     if (is.null(url)) {
         url <- paste0("https://sqs.",region,".amazonaws.com")
@@ -58,7 +58,7 @@ sqsHTTP <- function(url = NULL,
     }
 
     cont <- content(r, "text", encoding = "UTF-8")
-    if (tolower(http_status(r)$category) == "client error") {
+    if (http_error(r)) {
         x <- try(as_list(read_xml(cont)), silent = TRUE)
         if (inherits(x, "try-error")) {
             x <- try(fromJSON(cont)$Error, silent = TRUE)

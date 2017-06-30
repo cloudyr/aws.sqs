@@ -3,6 +3,7 @@
 \name{get_queue_attrs}
 \alias{get_queue_attrs}
 \alias{set_queue_attrs}
+\alias{set_queue_attrs}
 \title{Queue Attributes}
 \usage{
 get_queue_attrs(queue, attributes = "All", query = NULL, ...)
@@ -29,13 +30,12 @@ Get and set queue attributes
 \details{
 Get or set the attributes for a queue.
 }
-\author{
-Thomas J. Leeper
-}
 \references{
 \href{http://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_ReceiveMessage.html}{ReceiveMessage}
 }
 \seealso{
 \code{link{create_queue}}
 }
-
+\author{
+Thomas J. Leeper
+}

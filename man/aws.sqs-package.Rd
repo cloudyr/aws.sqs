@@ -2,8 +2,8 @@
 % Please edit documentation in R/aws.sqs-package.R
 \docType{package}
 \name{aws.sqs-package}
-\alias{aws.sqs}
 \alias{aws.sqs-package}
+\alias{aws.sqs}
 \title{AWS SQS Client Package}
 \description{
 A simple client package for the Amazon Web Services (AWS) Simple Queue
@@ -35,4 +35,3 @@ Service (SQS) REST API.
 Thomas J. Leeper <thosjleeper@gmail.com>
 }
 \keyword{package}
-

@@ -3,6 +3,7 @@
 \name{add_permission}
 \alias{add_permission}
 \alias{remove_permission}
+\alias{remove_permission}
 \title{Change queue permissions}
 \usage{
 add_permission(queue, label, principal, action, query = NULL, ...)
@@ -31,9 +32,6 @@ Add or remove queue permissions
 \details{
 Add or removes a permission from an SQS queue.
 }
-\author{
-Thomas J. Leeper
-}
 \references{
 \href{http://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_AddPermission.html}{AddPermission}
 \href{http://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_RemovePermission.html}{RemovePermission}
@@ -41,4 +39,6 @@ Thomas J. Leeper
 \seealso{
 \code{link{create_queue}} \code{\link{get_queue_attrs}} \code{\link{set_queue_attrs}}
 }
-
+\author{
+Thomas J. Leeper
+}
