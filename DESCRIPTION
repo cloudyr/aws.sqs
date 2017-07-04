@@ -5,9 +5,8 @@ Version: 0.1.10
 Date: 2017-07-04
 Authors@R: c(person("Thomas J.", "Leeper", role = c("aut", "cre"),
                     email = "thosjleeper@gmail.com"))
-Maintainer: Thomas J. Leeper <thosjleeper@gmail.com>
-Description: A simple client package for the Amazon Web Services (AWS) Simple
-    Queue Service (SQS) <https://aws.amazon.com/sqs/> API.
+Description: A simple client package for the Amazon Web Services ('AWS') Simple
+    Queue Service ('SQS') <https://aws.amazon.com/sqs/> 'API'.
 License: GPL (>= 2)
 Imports:
     httr,
