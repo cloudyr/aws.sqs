@@ -1,8 +1,8 @@
 Package: aws.sqs
 Type: Package
 Title: AWS SQS Client Package
-Version: 0.1.9
-Date: 2017-06-30
+Version: 0.1.10
+Date: 2017-07-04
 Authors@R: c(person("Thomas J.", "Leeper", role = c("aut", "cre"),
                     email = "thosjleeper@gmail.com"))
 Maintainer: Thomas J. Leeper <thosjleeper@gmail.com>

@@ -1,6 +1,5 @@
 #' @rdname permissions
 #' @title Change queue permissions
-#' @aliases add_permission remove_permission
 #' @description Add or remove queue permissions
 #' @details Add or removes a permission from an SQS queue.
 #' @param queue A character string containing a queue URL, or the name of the queue.
@@ -17,7 +16,7 @@
 #' \href{http://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_RemovePermission.html}{RemovePermission}
 #' @importFrom stats setNames
 #' @export
-add_permission <- function(queue, label, principal, action, query = NULL, ...) {
+add_queue_permission <- function(queue, label, principal, action, query = NULL, ...) {
     if ((length(action) != length(principal))) {
         if ((length(action) == 1) & (length(principal) > 1)) {
             action <- rep(action, length(principal))
@@ -48,7 +47,7 @@ add_permission <- function(queue, label, principal, action, query = NULL, ...) {
 
 #' @rdname permissions
 #' @export
-remove_permission <- function(queue, label, query = NULL, ...) {
+remove_queue_permission <- function(queue, label, query = NULL, ...) {
     queue <- .urlFromName(queue)
     out <- sqsHTTP(url = queue, query = c(query, list(Action = "RemovePermission", Label = label)), ...)
     if (inherits(out, "aws-error")) {

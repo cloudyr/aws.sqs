@@ -1,3 +1,7 @@
+# CHANGES TO aws.sqs 0.1.10
+
+* Change functions `add_permission` and `remove_permission` to `add_queue_permission` and `remove_queue_permission` to avoid namespace clash with **aws.sns** in **awspack**.
+
 # CHANGES TO aws.sqs 0.1.7
 
 * Update docs and knit README for CRAN release.
