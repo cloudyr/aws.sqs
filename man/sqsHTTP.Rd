@@ -4,22 +4,27 @@
 \alias{sqsHTTP}
 \title{Execute SQS API Request}
 \usage{
-sqsHTTP(url = NULL, query = list(),
+sqsHTTP(url = NULL, headers = list(), query = list(),
+  verbose = getOption("verbose", FALSE),
   region = Sys.getenv("AWS_DEFAULT_REGION", "us-east-1"), key = NULL,
   secret = NULL, session_token = NULL, ...)
 }
 \arguments{
 \item{url}{A character string containing an SQS API endpoint URL.}
 
+\item{headers}{A list of headers to pass to the HTTP request.}
+
 \item{query}{An optional named list containing query string parameters and their character values.}
 
-\item{region}{A character string containing an AWS region. If missing, the default \dQuote{us-east-1} is used.}
+\item{verbose}{A logical indicating whether to be verbose. Default is given by \code{options("verbose")}.}
 
-\item{key}{A character string containing an AWS Access Key ID. See \code{\link[aws.signature]{locate_credentials}}.}
+\item{region}{A character string specifying an AWS region. See \code{\link[aws.signature]{locate_credentials}}.}
 
-\item{secret}{A character string containing an AWS Secret Access Key. See \code{\link[aws.signature]{locate_credentials}}.}
+\item{key}{A character string specifying an AWS Access Key. See \code{\link[aws.signature]{locate_credentials}}.}
 
-\item{session_token}{Optionally, a character string containing an AWS temporary Session Token. See \code{\link[aws.signature]{locate_credentials}}.}
+\item{secret}{A character string specifying an AWS Secret Key. See \code{\link[aws.signature]{locate_credentials}}.}
+
+\item{session_token}{Optionally, a character string specifying an AWS temporary Session Token to use in signing a request. See \code{\link[aws.signature]{locate_credentials}}.}
 
 \item{...}{Additional arguments passed to \code{\link[httr]{GET}}.}
 }
