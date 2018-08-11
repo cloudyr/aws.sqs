@@ -155,11 +155,11 @@ send_msg <- function(queue, msg, attributes = NULL, delay = NULL, query = NULL, 
     if(length(msg) > 1) {
         # batch mode
         query_args <- list(Action = "SendMessageBatch")
-        n <- 1:length(msg)
+        n <- seq_len(length(msg))
         id <- paste0("msg", n)
         a <- as.list(c(id, msg))
-        names(a) <- c(paste0("DeleteMessageBatchRequestEntry.",n,".Id"),
-                      paste0("DeleteMessageBatchRequestEntry.",n,".ReceiptHandle"))
+        names(a) <- c(paste0("SendMessageBatchRequestEntry.",n,".Id"),
+                      paste0("SendMessageBatchRequestEntry.",n,".MessageBody"))
         query_args <- c(query_args, a)
         out <- sqsHTTP(url = queue, query = query_args, ...)
         if (inherits(out, "aws-error") || inherits(out, "unknown")) {

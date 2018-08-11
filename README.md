@@ -37,7 +37,7 @@ get_queue_url("ExampleQueue")
 ```
 ## [1] "https://sqs.us-east-1.amazonaws.com/920667304251/ExampleQueue"
 ## attr(,"RequestId")
-## [1] "a22e2266-d94a-5abe-80cc-73b6a87fb31f"
+## [1] "20330067-633c-56a4-b761-538e607d0150"
 ```
 
 Once a URL is created, it will show up in the list of queues:
@@ -49,10 +49,8 @@ list_queues()
 
 ```
 ## [1] "https://sqs.us-east-1.amazonaws.com/920667304251/ExampleQueue"
-## [2] "https://sqs.us-east-1.amazonaws.com/920667304251/MTurkR"      
-## [3] "https://sqs.us-east-1.amazonaws.com/920667304251/TestQueue"   
 ## attr(,"RequestId")
-## [1] "4ee16392-bc14-5bf3-bf27-3242cd226252"
+## [1] "38ed86ee-d2b3-5a9b-b183-d507d1f17d6f"
 ```
 
 And you can begin performing operations on the queue. The most important of these are `send_msg()` (to put a message into the queue), `receive_msg()` (to retrieve one or more messages from the queue), and `delete_msg()` (to delete a message once it is no longer needed in the queue).
@@ -71,14 +69,14 @@ send_msg("ExampleQueue", "This is a test message")
 ## [1] "fafb00f5732ab283681e124bf8747ed1"
 ## 
 ## [[1]]$MessageId
-## [1] "8f56363a-afb5-44d5-ae90-37a2ebe7d78f"
+## [1] "a9a73f38-873c-460b-9b32-60bf3cf669ea"
 ## 
 ## [[1]]$SequenceNumber
 ## NULL
 ## 
 ## 
 ## attr(,"RequestId")
-## [1] "266990f9-dc4f-5fac-b384-c129ad79660d"
+## [1] "49f983e2-aa0a-5fba-9458-d00ba949e84e"
 ```
 
 The `send_msg()` function is also vectorized, so that you can send multiple messages in the same call simply by specifying a vector of message bodies. Note: The `send_msg()` function will return some (mostly useless) details of the message, namely the MD5 sum of the message body. Perhaps this could be used to confirm that SQS has received and entered the message into the queue correctly.
@@ -97,9 +95,9 @@ The flip side of `send_msg()` is `receive_msg()`, which pulls one or more messag
 ##   MD5OfMessageAttributes MessageAttributes
 ## 1                     NA                NA
 ##                              MessageId
-## 1 8f56363a-afb5-44d5-ae90-37a2ebe7d78f
+## 1 a9a73f38-873c-460b-9b32-60bf3cf669ea
 ##                                                                                                                                                                                                                                                                                                                                                                                          ReceiptHandle
-## 1 AQEBlJDH5q5K912m3kinrOoa4fiEgRjR24Qp0nIX1MsKnlp6RPZPABob/sqo4cK4PG6Z3G1zDCJmu8fjhwpY3wG8+nqSh9H2Nv4mfuGG/kjBaklKnmeGg5AT6EHHwxkP0Hq8nQgqvGWzZEeWlpeb/Smld5ijRw6Ns/C4ynjsZYkA/EyQ4SN2nDczzGHsPsMMLii2nn6PiVKZSBMAJ6hOJX0XRiAyqtS1j4D42duJwVfKo4jY27OcvB4DSfSjkeYYxlNL07qICUK9rqdZBm7lKV+7+HY3J75mm+mtk8eaHUP4OlWQpgV3kT0m+LDt9i4RQz+7lGKZC8Jmk24DSbOh1FK1ctFfeBGmT1361lFh7vUP/IO0LGqz6lBgT7hMmBRYPGqQ
+## 1 AQEBfqLYx4CnlybzJvGcwoLS2fZ2nxmC3KnhVQDTAyjjoTS1FUe7AablBlfn/Nylzc1zrI1sr4WstzgzzDDbGl0shy6OMCeIFehvVeUbHm8q9IL/aT6QwoaMwp2mZakR6NjSS5DAmbHxqTnS654Z9uwgmVKKBdoa/wUqUxis7dsr3q9MXt1rWNHqYjVVdmIRSEl/cc/+EkgyFGEE9Q8xu0OVp6gghQ93xD5GKZNvRXV6Bdrt1Qpr4soQIwsLZQ1KqKA+Q82ZjNwfjeZ21t+zjLVb+trayzzkuGuMpP4aEB5+lLh7pygNdz/wRhkCkteTdHnQzcBbiiF/HFGBgjhM2MrD5+frO9GiXcVODIcJdDCewt3T+ZjyEtspCDSvy0tL3L/p
 ```
 
 ```r
@@ -113,9 +111,9 @@ receive_msg("ExampleQueue", timeout = 0) # msg still visible, does not mask msg 
 ##   MD5OfMessageAttributes MessageAttributes
 ## 1                     NA                NA
 ##                              MessageId
-## 1 8f56363a-afb5-44d5-ae90-37a2ebe7d78f
+## 1 a9a73f38-873c-460b-9b32-60bf3cf669ea
 ##                                                                                                                                                                                                                                                                                                                                                                                          ReceiptHandle
-## 1 AQEBnY5W+8UrtMvzJe1RXjL5IZAJ8/+b9lqZ2da/3xfmDrg3ExU9i3mg8ey3Eo0XJ9aFC0u710aZ8i6JumRjiY05GkQ9dXHttfAL2EOC6vIi4v5WSoBj/sq6vUjdyDHEyf8545QfgN1wt+SmcWVH6SDHA8wc81XA6yLwFmxFqROUw3yq0d2BWFHzXePTTMlMaufSVODursYT3te9vc8RmIsC5cLUG7mwf0tNzHWo/lNYqWCLto4+JQB7MHNhO3OHDlLoEtWTLXuu+AqcaF2jVjYHb1r6x2r8givBQ0h37OtuYwhtQ2DXJqLPQG8R/5+DHehgy4V0rYqNelxcfGa7g2WAakApQMi8r6wFFSC7oewuqP5uKGLT7syF+40JGtQmMUlB
+## 1 AQEBqrmOcFoLZ0Hya3W4ZRGxd0FoZ+ktqjMnUMG+LZFrppUvR3rfw7KbV4m3iSd/1zGoajxCk54JsSjsXLNZNvORAPOKoajVYCqGPReRAyABTwAGqyxULUwZ/XQyxyK1LtUHOsmYUoiJpOfFSoszO+tIoOWfH6bYQz4j/s49wgi6H52xz5MhG0ptTIbUYoZ8aR/kTSP7pLILwtIfiVxROU38jdTwvmaJWJMaL+aWw09JcikeqgKPeboiNFtV5LVyDIUzIEAjENbIzG9YuasonGEV7cLWqT4QahpZsuKRur0H0xjURLkHl8Qc4ScmgAsmEWbCd64z6U1p/65YGGujqjLWIiVO5+e6vStMX4KC55agx4XQqAsb1wcsRFlunNGTWFeU
 ```
 
 ```r
@@ -129,9 +127,9 @@ receive_msg("ExampleQueue") # msg still visible, masks msg for next call
 ##   MD5OfMessageAttributes MessageAttributes
 ## 1                     NA                NA
 ##                              MessageId
-## 1 8f56363a-afb5-44d5-ae90-37a2ebe7d78f
+## 1 a9a73f38-873c-460b-9b32-60bf3cf669ea
 ##                                                                                                                                                                                                                                                                                                                                                                                          ReceiptHandle
-## 1 AQEBQWuh8Tl3BhQqj5RC+v/sknHrlvHDOe6qndf+KmGrGoM04v755AfkH2Qx0LO5k8kLo9FMbgiyvXMarJ2ezMHx/AENa1yBImi3ruaeUsyA0vXtFcuQ9yrOT+EtDdaVJY8DH0CZg8lPmc8nsDyM+DZC2hK3BwpqdR3D31KXyTr7jK+w36vw0lWLqzGZpO71TbLwjjQiaipKdAD//F8k1Q/NDyUq7IEmHQLZRA2UPhMHPgAzasbGj9VdtWL4LIsaXPlhw4nEyrYmg5JZSXjQxHXKvikAoeOTWu3NnrKJjZoqD1SlSuc/6M5qZ8WdmwpKox/7L/Z+bTThRWkL7qLs5fLyTnfbFHTTySL6qKkePGJMBHSgjcDQehN5CzW48FJfXQIH
+## 1 AQEBBfBjT6wfigMxF7iWckNKbVXBYZemLXrhwfYMWB0dcR4w+EOkFPwdEtbAYUNrD7+IDmxoTJm8+KL8gkZTsSGg2hwyib17ZjixL4p05ueSEWAAQ3ZPhyBShJ2E9hXkIh68Uf0FGB4Jwl4TK+aw8gT1cxfyWi04j2DT8uzkCi1g4l3zV1flPUmY+nAnvkeeqOqNapOgDrRumMUpr0oCYOOHGTynmrmabm3ChDG/yvoLRz32Vugpzwdc2mufUOPQiHLBBCAqClTn36dNAOEhySqvybI7wOXwL4dCyMGiQKbosKs64OB0Vquplbp3IOqztZ7/NT2hQ4om0Ba4YR8OvhnyIx1FfWOjKeCOFfk+eHUVIopXe7w4cZHFH7NiuiRQ1LfF
 ```
 
 ```r
@@ -192,7 +190,7 @@ visibility("ExampleQueue", m$ReceiptHandle, timeout = 30)
 ```
 ## [1] TRUE
 ## attr(,"RequestId")
-## [1] "92d36ef8-3916-5d67-a391-3f284829a4c6"
+## [1] "f33f815b-ded1-5e44-aadc-d2b2dd8179b0"
 ```
 
 Two important notes are worth highlighting here. First, a queue can only have a maximum timeout of 12 hours, but `visibility()` is not aware of how long the current visibility is (and that amount of time is not retrievable via the API), so you need to be cautious in extending the visibility timeout beyond the maximum by respecting the queue's default timeout and accommodating any modifications of that made when polling for new messages. Second, the function is vectorized to allow visibility timeout extensions, of potentially different amounts of time, for multiple messages from the same queue.
@@ -207,7 +205,7 @@ delete_msg("ExampleQueue", m$ReceiptHandle[1])
 ```
 ## [1] TRUE
 ## attr(,"RequestId")
-## [1] "e7347f29-1bba-531d-b12f-2ef96a858abc"
+## [1] "67f24f4a-361b-5300-99b9-1ca3354be4f4"
 ```
 
 `delete_msg()` will accept a vector of ReceiptHandle values from the same queue to perform a bulk delete. If you're done with all messages in a queue, you can remove them all using, e.g., `purge_queue("TestQueue")`. If you're done with a queue entirely, you can delete it:
@@ -220,7 +218,7 @@ delete_queue("ExampleQueue")
 ```
 ## [1] TRUE
 ## attr(,"RequestId")
-## [1] "5ce460e0-f289-5a73-9bcb-313083c903d2"
+## [1] "2a908609-5836-5aa8-a4a2-d5e05b67bd5c"
 ```
 
 ## Installation

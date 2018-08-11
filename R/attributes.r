@@ -76,7 +76,7 @@ get_queue_url <- function(name, owner = NULL, query = NULL, ...) {
 }
 
 .urlFromName <- function(queue) {
-    p <- parse_url(queue)
+    p <- httr::parse_url(queue)
     if (is.null(p$scheme)) {
         out <- get_queue_url(queue)
         if(!length(out))

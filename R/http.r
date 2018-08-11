@@ -32,7 +32,7 @@ function(
   ...
 ) {
     # locate and validate credentials
-    credentials <- locate_credentials(key = key, secret = secret, session_token = session_token, region = region, verbose = verbose)
+    credentials <- aws.signature::locate_credentials(key = key, secret = secret, session_token = session_token, region = region, verbose = verbose)
     key <- credentials[["key"]]
     secret <- credentials[["secret"]]
     session_token <- credentials[["session_token"]]
@@ -42,10 +42,10 @@ function(
     if (is.null(url)) {
         url <- paste0("https://sqs.",region,".amazonaws.com")
     }
-    p <- parse_url(url)
+    p <- httr::parse_url(url)
     action <- if(p$path == "") "/" else paste0("/", p$path)
     d_timestamp <- format(Sys.time(), "%Y%m%dT%H%M%SZ", tz = "UTC")
-    Sig <- signature_v4_auth(
+    Sig <- aws.signature::signature_v4_auth(
            datetime = d_timestamp,
            region = region,
            service = "sqs",
@@ -66,23 +66,23 @@ function(
     if (!is.null(session_token) && session_token != "") {
         headers[["x-amz-security-token"]] <- session_token
     }
-    H <- do.call(add_headers, headers)
+    H <- do.call(httr::add_headers, headers)
     
     # execute request
     if (length(query)) {
-        r <- GET(url, H, query = query, ...)
+        r <- httr::GET(url, H, query = query, ...)
     } else {
-        r <- GET(url, H, ...)
+        r <- httr::GET(url, H, ...)
     }
 
-    cont <- content(r, "text", encoding = "UTF-8")
-    if (http_error(r)) {
-        x <- try(as_list(read_xml(cont)), silent = TRUE)
+    cont <- httr::content(r, "text", encoding = "UTF-8")
+    if (httr::http_error(r)) {
+        x <- try(xml2::as_list(xml2::read_xml(cont)), silent = TRUE)
         if (inherits(x, "try-error")) {
             x <- try(jsonlite::fromJSON(cont)$Error, silent = TRUE)
         }
-        warning(paste0(http_status(r)$message, ": ", x$Code, " (", x$Message, ")"))
-        h <- headers(r)
+        warning(paste0(httr::http_status(r)$message, ": ", x$Code, " (", x$Message, ")"))
+        h <- httr::headers(r)
         out <- structure(x, headers = h, class = "aws_error")
         attr(out, "request_canonical") <- Sig$CanonicalRequest
         attr(out, "request_string_to_sign") <- Sig$StringToSign
@@ -90,7 +90,7 @@ function(
     } else {
         out <- try(jsonlite::fromJSON(cont), silent = TRUE)
         if (inherits(out, "try-error")) {
-            out2 <- try(as_list(read_xml(cont)), silent = TRUE)
+            out2 <- try(xml2::as_list(xml2::read_xml(cont)), silent = TRUE)
             if (inherits(out2, "try-error")) {
                 out <- structure(cont, class = "unknown")
             } else {
