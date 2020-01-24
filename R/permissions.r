@@ -27,7 +27,7 @@ add_queue_permission <- function(queue, label, principal, action, query = NULL, 
         }
     }
     v <- c("*", "SendMessage", "ReceiveMessage", "DeleteMessage", "ChangeMessageVisibility", "GetQueueAttributes", "GetQueueUrl")
-    if (!any(action) %in% v) {
+    if (!any(action %in% v)) {
         stop("Unrecogized 'action':", paste0(action[!action %in% v], collapse = ", "))
     }
     a <- paste0("ActionName.", seq_along(action))
